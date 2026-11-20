@@ -1,0 +1,1335 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!--
+  =====================================================================
+  MySafeEats marketing site. Single file, no build step.
+  PLACEHOLDERS (search for these and replace before launch):
+    [your-domain.com]     Production domain (canonical, Open Graph, JSON-LD)
+    [Company Name]        Legal entity name for the footer copyright
+    hello@[your-domain.com]  Contact / support email
+    #app-store-url        Apple App Store listing URL (and official badge)
+    #google-play-url      Google Play listing URL (and official badge)
+    #privacy-policy-url   Privacy policy page
+    #terms-url            Terms of use page
+    "operatingSystem"     Confirm platforms in the JSON-LD block below
+  Supporting files expected next to this page: favicon.svg,
+  apple-touch-icon.png, og-image.png (all included in this folder).
+  =====================================================================
+-->
+<title>MySafeEats — The gluten scanner that reads ingredients first</title>
+<meta name="description" content="Scan a barcode and MySafeEats checks every ingredient for gluten, not the front-of-package claims. Built for celiac disease, customizable for any allergen.">
+<link rel="canonical" href="https://[your-domain.com]/">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#E65E2C">
+<meta name="color-scheme" content="light">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MySafeEats">
+<meta property="og:title" content="MySafeEats — Read the ingredients, not the marketing">
+<meta property="og:description" content="Scan a UPC barcode and MySafeEats checks every ingredient against a list of gluten-containing ingredients, plus any allergens you add.">
+<meta property="og:url" content="https://[your-domain.com]/">
+<meta property="og:image" content="https://[your-domain.com]/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="MySafeEats: read the ingredients, not the marketing.">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="MySafeEats — Read the ingredients, not the marketing">
+<meta name="twitter:description" content="The gluten scanner that checks every ingredient, not the front-of-package claims. Built for celiac disease.">
+<meta name="twitter:image" content="https://[your-domain.com]/og-image.png">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap">
+
+<script>document.documentElement.classList.add('js');</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "MobileApplication",
+  "name": "MySafeEats",
+  "url": "https://[your-domain.com]/",
+  "description": "MySafeEats helps people with celiac disease find gluten-free foods. Scan a UPC barcode and the app checks every ingredient against a list of gluten-containing ingredients, plus any allergens you add.",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "iOS, Android"
+}
+</script>
+
+<style>
+/* ===================== Tokens ===================== */
+:root{
+  /* Brand */
+  --orange:#E65E2C;        /* primary */
+  --orange-hover:#EE7246;
+  --orange-ink:#B4400F;    /* orange for text on light backgrounds (AA) */
+  --orange-tint:#FBE0D2;
+  --green:#245A49;         /* secondary */
+  --green-deep:#1C4A3B;
+  --green-tint:#E1ECE4;
+  --lime:#E2EE6E;          /* accent pop */
+  --cream:#F3E8D2;         /* page background */
+  --cream-2:#EDE3CF;
+  --paper:#FBF7EF;         /* cards */
+  /* Text */
+  --ink:#12261E;
+  --ink-2:#3F4A43;
+  --ink-3:#5F675F;
+  --on-green:#FFF7EA;
+  --on-green-2:#D3DDD0;
+  /* Status (never use orange for status; it's the brand) */
+  --flag:#B42318;
+  --flag-bg:#FCE8E6;
+  --ok:#245A49;
+  --ok-bg:#E1ECE4;
+  /* Lines & fields */
+  --line:rgba(22,32,26,.12);
+  --line-strong:rgba(22,32,26,.22);
+  --field:#7A8078;
+  /* Type */
+  --font-display:"Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --font-body:"Archivo", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* Shape & depth */
+  --radius-s:14px;
+  --radius:22px;
+  --radius-l:32px;
+  --panel-gap:clamp(.5rem, 1.4vw, 1rem);
+  --panel-radius:clamp(24px, 4vw, 44px);
+  --shadow-s:0 1px 2px rgba(22,32,26,.05), 0 3px 10px rgba(22,32,26,.05);
+  --shadow:0 2px 4px rgba(22,32,26,.04), 0 16px 36px -12px rgba(22,32,26,.2);
+  --shadow-l:0 40px 70px -28px rgba(22,32,26,.55), 0 14px 28px -14px rgba(22,32,26,.3);
+  --container:1180px;
+  --gutter:clamp(1rem, 4vw, 2rem);
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+
+/* ===================== Base ===================== */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-padding-top:5.5rem}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--font-body);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+h1,h2,h3,h4,p,ul,ol,figure,blockquote{margin:0}
+ul[role="list"],ol[role="list"]{list-style:none;padding:0}
+a{color:inherit}
+p a{color:var(--orange-ink);text-underline-offset:.18em;text-decoration-thickness:1.5px}
+p a:hover{color:var(--ink)}
+button,input{font:inherit}
+.container{width:min(100% - 2 * var(--gutter), var(--container));margin-inline:auto}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip-link{position:absolute;left:1rem;top:-6rem;z-index:100;background:var(--ink);color:var(--cream);padding:.75rem 1.1rem;border-radius:12px;font-weight:600;text-decoration:none}
+.skip-link:focus{top:1rem}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.on-green :focus-visible{outline-color:var(--lime)}
+.icon{width:1.25em;height:1.25em;flex:none;display:inline-block;vertical-align:middle;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ===================== Type ===================== */
+h1,h2,.display{font-family:var(--font-display);font-weight:900;font-stretch:72%;letter-spacing:-.012em;line-height:.94;text-wrap:balance}
+h1{font-size:clamp(2.85rem, 1.4rem + 6vw, 6rem)}
+h2{font-size:clamp(2.2rem, 1.35rem + 3.4vw, 4rem)}
+h2 em{font-style:normal;color:var(--orange-ink)}
+h3{font-size:1.2rem;line-height:1.3;font-weight:700;letter-spacing:-.01em}
+p,li{text-wrap:pretty}
+.lead{font-size:clamp(1.1rem, 1rem + .45vw, 1.3rem);line-height:1.55;color:var(--ink-2);max-width:36em}
+.eyebrow{display:inline-flex;align-items:center;gap:.55rem;font-size:.8rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--orange-ink);background:var(--orange-tint);padding:.45rem .9rem;border-radius:999px;margin-bottom:1.4rem}
+.eyebrow::before{content:"";width:.5rem;height:.5rem;border-radius:50%;background:currentColor}
+
+/* ===================== Buttons ===================== */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;min-height:3rem;padding:.75rem 1.4rem;border-radius:999px;border:2px solid transparent;font-weight:650;font-size:1rem;line-height:1.1;text-decoration:none;cursor:pointer;transition:background-color .2s var(--ease),color .2s,border-color .2s,transform .2s var(--ease),box-shadow .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0)}
+.btn .icon{transition:transform .2s var(--ease)}
+.btn:hover .icon{transform:translateX(3px)}
+.btn-primary{background:var(--orange);color:var(--ink);box-shadow:0 10px 22px -10px rgba(230,94,44,.8)}
+.btn-primary:hover{background:var(--orange-hover)}
+.btn-green{background:var(--green);color:var(--cream);box-shadow:0 12px 24px -12px rgba(22,32,26,.7)}
+.btn-green:hover{background:var(--green-deep)}
+.btn-green .icon{color:var(--lime)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn-ghost:hover{background:rgba(22,32,26,.08)}
+.btn-lg{min-height:3.5rem;padding:.95rem 1.65rem;font-size:1.0625rem}
+.btn-sm{min-height:2.75rem;padding:.55rem 1.15rem;font-size:.95rem}
+
+/* ===================== Header ===================== */
+.site-header{position:sticky;top:0;z-index:50;background:rgba(246,239,222,.86);-webkit-backdrop-filter:saturate(1.3) blur(14px);backdrop-filter:saturate(1.3) blur(14px);border-bottom:1px solid transparent;transition:border-color .3s,box-shadow .3s}
+.site-header.is-scrolled{border-bottom-color:var(--line);box-shadow:0 8px 24px -20px rgba(22,32,26,.5)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:4.5rem}
+.brand{display:inline-flex;align-items:center;gap:.55rem;text-decoration:none;border-radius:12px;--wm-1:var(--green);--wm-2:var(--orange);--mk-circle:var(--green);--mk-bars:var(--lime)}
+.brand-mark{width:2.4rem;height:2.4rem;flex:none}
+.brand-word{width:auto;height:1.8rem;aspect-ratio:225.7/48}
+.site-nav{display:flex;align-items:center;gap:1rem}
+.site-nav ul{display:flex;gap:.15rem}
+.site-nav a:not(.btn){display:inline-flex;align-items:center;min-height:2.75rem;padding:.4rem .85rem;border-radius:999px;text-decoration:none;font-weight:550;font-size:.97rem;color:var(--ink-2);transition:background-color .2s,color .2s}
+.site-nav a:not(.btn):hover{color:var(--ink);background:rgba(22,32,26,.06)}
+.nav-toggle{display:none}
+.nav-toggle-bars,.nav-toggle-bars::before,.nav-toggle-bars::after{display:block;width:1.15rem;height:2px;border-radius:2px;background:currentColor}
+.nav-toggle-bars{position:relative;transition:background-color .2s}
+.nav-toggle-bars::before,.nav-toggle-bars::after{content:"";position:absolute;left:0;transition:transform .25s var(--ease)}
+.nav-toggle-bars::before{transform:translateY(-6px)}
+.nav-toggle-bars::after{transform:translateY(6px)}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bars{background:transparent}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bars::before{transform:rotate(45deg)}
+.nav-toggle[aria-expanded="true"] .nav-toggle-bars::after{transform:rotate(-45deg)}
+@media (max-width:899.98px){
+  .js .nav-toggle{display:inline-grid;place-items:center;width:3rem;height:3rem;border-radius:999px;border:2px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer}
+  .js .site-nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:.75rem;padding:.75rem var(--gutter) 1.5rem;background:var(--cream);border-bottom:1px solid var(--line);box-shadow:0 30px 40px -30px rgba(22,32,26,.5)}
+  .js .site-header.nav-open .site-nav{display:flex}
+  .js .site-nav ul{flex-direction:column}
+  .js .site-nav a:not(.btn){min-height:3.25rem;font-size:1.15rem;padding-inline:.75rem;border-radius:14px;color:var(--ink)}
+  .js .site-nav .btn{width:100%}
+  html:not(.js) .header-inner{flex-wrap:wrap;padding-block:.5rem}
+  html:not(.js) .site-nav{flex-wrap:wrap}
+  html:not(.js) .site-nav ul{flex-wrap:wrap}
+}
+@media (prefers-reduced-motion:no-preference){
+  .js .site-header.nav-open .site-nav{animation:menuIn .22s var(--ease)}
+}
+
+/* ===================== Panels ===================== */
+.panel{margin-inline:var(--panel-gap);border-radius:var(--panel-radius);position:relative;overflow:hidden;isolation:isolate}
+.section{padding-block:clamp(4.5rem, 3rem + 7vw, 8.5rem)}
+.panel-gap-top{margin-top:var(--panel-gap)}
+.section-head{max-width:48rem;margin-bottom:clamp(2.5rem, 5vw, 4rem)}
+.section-head h2{margin-bottom:1.1rem}
+
+/* ===================== Hero ===================== */
+.hero-panel{background:var(--orange);color:var(--ink);padding-block:clamp(2.75rem, 6vw, 5.5rem) clamp(3.5rem, 7vw, 6.5rem)}
+.hero-panel::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:radial-gradient(rgba(22,32,26,.09) 1.2px, transparent 1.3px);background-size:22px 22px;-webkit-mask-image:linear-gradient(100deg,#000 0%,transparent 55%);mask-image:linear-gradient(100deg,#000 0%,transparent 55%)}
+.hero-grid{display:grid;gap:clamp(3.5rem, 7vw, 4rem);align-items:center}
+@media (min-width:980px){.hero-grid{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}}
+.hero .eyebrow{background:var(--lime);color:var(--ink)}
+.hero h1{margin-bottom:1.5rem}
+.nowrap{white-space:nowrap}
+.hero h1 .hl{font-style:normal;display:inline-block;background:var(--lime);padding:.02em .14em .06em;border-radius:.16em;transform:rotate(-2deg);box-shadow:0 .08em 0 rgba(22,32,26,.9)}
+.hero .lead{color:var(--ink);margin-bottom:2.1rem}
+.hero-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-bottom:2.25rem}
+.hero-points{display:flex;flex-wrap:wrap;gap:.7rem 1.5rem;font-size:.97rem;font-weight:600}
+.hero-points li{display:inline-flex;align-items:center;gap:.55rem}
+.hero-points .mark{width:1.5rem;height:1.5rem;background:var(--green);color:var(--lime)}
+@media (max-width:479.98px){.hero-actions .btn{flex:1 1 100%}}
+
+/* Shared check / flag marks */
+.mark{display:inline-grid;place-items:center;border-radius:50%;flex:none}
+.mark .icon{width:62%;height:62%;stroke-width:3}
+.mark--ok{background:var(--ok-bg);color:var(--ok)}
+.mark--flag{background:var(--flag);color:#fff}
+
+/* Hero visual: phone + annotations */
+.hero-visual{position:relative;display:flex;justify-content:center;padding-block:1rem}
+.phone-wrap{position:relative;isolation:isolate}
+.phone-wrap::before{content:"";position:absolute;z-index:-2;width:150%;aspect-ratio:1;left:50%;top:52%;translate:-50% -50%;border-radius:50%;background:var(--cream)}
+.phone-wrap::after{content:"";position:absolute;z-index:-1;width:118%;aspect-ratio:1;left:58%;top:40%;translate:-50% -50%;border-radius:50%;border:clamp(22px,4vw,34px) solid var(--green);border-color:var(--green) var(--green) transparent transparent;transform:rotate(-18deg)}
+
+.phone{--w:min(300px, 70vw);position:relative;width:var(--w);aspect-ratio:300/620;padding:calc(var(--w) * .034);border-radius:calc(var(--w) * .16);background:linear-gradient(150deg,#33413a 0%,#0e1712 40%,#1b2620 100%);box-shadow:inset 0 0 0 2px rgba(255,255,255,.08),var(--shadow-l);container-type:inline-size}
+.phone-screen{position:relative;height:100%;overflow:hidden;display:flex;flex-direction:column;border-radius:calc(var(--w) * .126);background:#0e1813;color:var(--ink);font-size:13px;font-size:4.7cqi;line-height:1.35}
+.ph-island{position:absolute;top:.62em;left:50%;translate:-50% 0;width:30%;height:1.75em;border-radius:999px;background:#000;z-index:3}
+.ph-status{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:.9em 1.7em .2em;color:#fff;font-size:.78em;font-weight:600}
+.ph-status svg{width:3.2em;height:1em;fill:currentColor}
+.ph-cam{position:relative;height:31%;flex:none;display:grid;place-items:center;background:radial-gradient(120% 90% at 50% 40%,#30443a 0%,#111e18 70%)}
+.ph-reticle{position:relative;width:70%;padding:.95em;background:
+  linear-gradient(var(--lime),var(--lime)) top left/1.5em 3px no-repeat,
+  linear-gradient(var(--lime),var(--lime)) top left/3px 1.5em no-repeat,
+  linear-gradient(var(--lime),var(--lime)) top right/1.5em 3px no-repeat,
+  linear-gradient(var(--lime),var(--lime)) top right/3px 1.5em no-repeat,
+  linear-gradient(var(--lime),var(--lime)) bottom left/1.5em 3px no-repeat,
+  linear-gradient(var(--lime),var(--lime)) bottom left/3px 1.5em no-repeat,
+  linear-gradient(var(--lime),var(--lime)) bottom right/1.5em 3px no-repeat,
+  linear-gradient(var(--lime),var(--lime)) bottom right/3px 1.5em no-repeat}
+.ph-label{background:#fff;border-radius:.45em;padding:.55em .75em .35em;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+.ph-label svg{display:block;width:100%;height:2.5em;fill:#111}
+.ph-label p{font:600 .56em/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.2em;text-align:center;margin-top:.4em;color:#111}
+.ph-scan-track{position:absolute;inset:.6em .5em}
+.ph-scan{position:absolute;left:0;right:0;top:0;height:2px;border-radius:2px;background:var(--orange);box-shadow:0 0 10px 2px rgba(230,94,44,.75)}
+.ph-sheet{position:relative;z-index:1;flex:1;margin-top:-1.1em;background:var(--paper);border-radius:1.5em 1.5em 0 0;padding:.55em 1.15em 0;overflow:hidden}
+.ph-sheet::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2.6em;background:linear-gradient(rgba(251,247,239,0),var(--paper))}
+.ph-handle{width:2.6em;height:.28em;border-radius:9px;background:rgba(22,32,26,.15);margin:0 auto .8em}
+.ph-product{display:flex;align-items:center;gap:.7em}
+.thumb{flex:none;position:relative;border-radius:.7em;background:linear-gradient(160deg,#9a6442,#5b3523);overflow:hidden}
+.thumb::before{content:"";position:absolute;left:18%;right:18%;top:22%;height:30%;border-radius:.25em;background:var(--lime)}
+.thumb::after{content:"";position:absolute;left:30%;right:30%;bottom:16%;height:12%;border-radius:9px;background:rgba(255,255,255,.75)}
+.ph-product .thumb{width:2.7em;height:2.7em}
+.ph-name{font-weight:700;font-size:.98em;line-height:1.2}
+.ph-meta{font-size:.72em;color:var(--ink-3)}
+.ph-verdict{display:flex;align-items:center;gap:.6em;margin:.8em 0 .5em;padding:.65em .75em;border-radius:.85em;background:var(--flag-bg);color:var(--flag)}
+.ph-verdict .icon{width:1.5em;height:1.5em}
+.ph-verdict strong{display:block;font-size:.92em;line-height:1.2}
+.ph-verdict span{display:block;font-size:.7em;color:var(--ink-2)}
+.ph-claim{display:flex;align-items:center;gap:.45em;font-size:.66em;color:var(--ink-3);margin-bottom:.35em}
+.ph-claim s{color:var(--ink-2)}
+.ph-list li{display:flex;align-items:center;gap:.55em;padding:.36em 0;border-top:1px solid var(--line);font-size:.76em}
+.ph-list .mark{width:1.45em;height:1.45em}
+.ph-list li.is-flag{color:var(--flag);font-weight:700}
+.ph-list .tag{margin-left:auto;font-size:.82em;font-weight:700;padding:.1em .55em;border-radius:999px;background:var(--flag);color:#fff}
+
+.float{position:absolute;z-index:3;width:max-content;max-width:12.5rem;padding:.75rem .95rem;border-radius:18px;background:var(--paper);box-shadow:var(--shadow);font-size:.85rem;line-height:1.3}
+.float-kicker{display:block;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.float-value{display:block;font-family:var(--font-display);font-stretch:72%;font-weight:900;font-size:1.3rem;letter-spacing:-.02em;margin-top:.2rem}
+.float-note{display:flex;align-items:center;gap:.35rem;margin-top:.35rem;font-weight:600;font-size:.8rem}
+.float--claim{top:9%;left:-.75rem;transform:rotate(-4deg)}
+.float--claim .float-value{color:var(--ink-3);text-decoration:line-through;text-decoration-thickness:2px}
+.float--claim .float-note{color:var(--ink-2)}
+.float--found{bottom:12%;right:-.75rem;transform:rotate(3deg)}
+.float--found .float-value{color:var(--flag)}
+.float--found .float-note{color:var(--flag)}
+.sticker{position:absolute;z-index:4;width:clamp(84px, 22vw, 118px);height:auto;top:-1.5rem;right:-.5rem}
+.sticker-bg{fill:var(--lime)}
+.sticker-text{font-family:var(--font-display);font-weight:900;font-stretch:72%;font-size:11.5px;letter-spacing:.06em;fill:var(--green)}
+.sticker-fork{fill:var(--green)}
+@media (min-width:600px){
+  .float--claim{left:-4.5rem}
+  .float--found{right:-4rem}
+  .sticker{right:-3rem;top:-1rem}
+}
+@media (max-width:420px){
+  .float{max-width:9.75rem;padding:.6rem .75rem;font-size:.78rem}
+  .float-value{font-size:1.08rem}
+}
+
+/* Hero entrance (CSS-only so it never blocks first paint) */
+@media (prefers-reduced-motion:no-preference){
+  .hero-copy>*{animation:rise .8s var(--ease) both}
+  .hero-copy>:nth-child(2){animation-delay:.06s}
+  .hero-copy>:nth-child(3){animation-delay:.12s}
+  .hero-copy>:nth-child(4){animation-delay:.18s}
+  .hero-copy>:nth-child(5){animation-delay:.24s}
+  .phone-wrap{animation:rise 1s var(--ease) .1s both}
+  .hero h1 .hl{animation:tilt .9s var(--ease) .5s both}
+  .ph-scan{animation:scan 1.3s ease-in-out .6s 2 alternate both}
+  .ph-verdict{animation:pop .5s var(--ease) 1.5s both}
+  .ph-list li{animation:fade .45s var(--ease) both;animation-delay:calc(1.65s + var(--i,0) * .07s)}
+  .float--claim{animation:popClaim .7s var(--ease) .8s both}
+  .float--found{animation:popFound .7s var(--ease) 2.1s both}
+  .sticker{animation:spinIn 1.4s var(--ease) .3s both}
+}
+@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes pop{from{opacity:0;transform:translateY(6px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes popClaim{from{opacity:0;transform:translateY(10px) rotate(-4deg) scale(.94)}to{opacity:1;transform:rotate(-4deg)}}
+@keyframes popFound{from{opacity:0;transform:translateY(10px) rotate(3deg) scale(.94)}to{opacity:1;transform:rotate(3deg)}}
+@keyframes tilt{from{transform:rotate(0)}to{transform:rotate(-2deg)}}
+@keyframes scan{from{top:0}to{top:100%}}
+@keyframes spinIn{from{opacity:0;transform:rotate(-120deg) scale(.7)}to{opacity:1;transform:none}}
+@keyframes menuIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+
+/* ===================== Ingredients first (green) ===================== */
+.panel--green{background:var(--green);color:var(--on-green)}
+.panel--green::before{content:"";position:absolute;z-index:-1;width:min(900px,120vw);aspect-ratio:1;right:-25%;top:-35%;border-radius:50%;background:radial-gradient(closest-side,rgba(226,238,110,.16),rgba(226,238,110,0))}
+.panel--green .eyebrow{background:rgba(226,238,110,.14);color:var(--lime)}
+.panel--green h2{color:var(--on-green)}
+.panel--green h2 em{color:var(--lime)}
+.panel--green .lead{color:var(--on-green-2)}
+.compare{display:grid;gap:1rem;align-items:stretch;margin-bottom:clamp(3.5rem, 7vw, 5rem)}
+@media (min-width:880px){.compare{grid-template-columns:minmax(0,1fr) auto minmax(0,1.15fr);gap:1.5rem}}
+.compare-card{display:flex;flex-direction:column;gap:1.25rem;border-radius:var(--radius-l);padding:clamp(1.35rem, 3vw, 2rem)}
+.compare-card--claims{background:var(--green-deep);border:1px solid rgba(246,239,222,.12)}
+.compare-card--facts{background:var(--paper);color:var(--ink);box-shadow:0 34px 60px -30px rgba(0,0,0,.6)}
+.compare-head{display:flex;align-items:center;gap:.85rem}
+.compare-icon{width:2.8rem;height:2.8rem;border-radius:14px;display:grid;place-items:center;flex:none;background:rgba(246,239,222,.1);color:var(--on-green)}
+.compare-card--facts .compare-icon{background:var(--orange);color:var(--ink)}
+.compare-kicker{font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--on-green-2)}
+.compare-card--facts .compare-kicker{color:var(--ink-3)}
+.compare-card h3{font-size:1.25rem}
+.claims{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.8rem;padding:1.6rem 1rem;border-radius:22px;border:2px dashed rgba(246,239,222,.2)}
+.claim{font-family:var(--font-display);font-stretch:72%;font-weight:700;font-size:1.1rem;padding:.55rem 1rem;border-radius:999px;background:rgba(246,239,222,.1);color:var(--on-green)}
+.claim--seal{display:grid;place-items:center;width:7.25rem;height:7.25rem;padding:0;border-radius:50%;text-align:center;line-height:.95;font-size:1.45rem;font-weight:800;text-transform:uppercase;background:var(--orange);color:var(--ink);transform:rotate(-8deg);box-shadow:0 0 0 6px var(--green-deep),0 0 0 8px rgba(230,94,44,.6)}
+.compare-foot{display:flex;align-items:center;gap:.55rem;font-size:.92rem;font-weight:600;color:var(--on-green-2)}
+.compare-arrow{display:grid;place-items:center;color:var(--lime)}
+.compare-arrow span{display:grid;place-items:center;width:3.25rem;height:3.25rem;border-radius:50%;background:rgba(226,238,110,.14)}
+@media (max-width:879.98px){.compare-arrow .icon{transform:rotate(90deg)}}
+.check-list li{display:flex;align-items:center;gap:.7rem;padding:.6rem .1rem;border-top:1px solid var(--line);font-weight:500}
+.check-list li:first-child{border-top:0}
+.check-list .mark{width:1.6rem;height:1.6rem}
+.check-list li.is-flag{color:var(--flag);font-weight:700;background:var(--flag-bg);border-radius:12px;margin-inline:-.6rem;padding-inline:.7rem;border-top-color:transparent}
+.check-list li.is-flag+li{border-top-color:transparent}
+.pill{display:inline-flex;align-items:center;gap:.3rem;padding:.22rem .65rem;border-radius:999px;font-size:.75rem;font-weight:700;letter-spacing:.02em;white-space:nowrap}
+.pill--flag{background:var(--flag);color:#fff;margin-left:auto}
+.pill--lime{background:var(--lime);color:var(--ink)}
+.compare-result{display:flex;align-items:center;gap:.65rem;padding:.9rem 1rem;border-radius:16px;background:var(--ink);color:var(--cream);font-size:.95rem}
+.compare-result .icon{color:#FDA29B}
+.points{display:grid;gap:2rem}
+@media (min-width:780px){.points{grid-template-columns:repeat(3,1fr);gap:2.5rem}}
+.points li{border-top:1px solid rgba(246,239,222,.18);padding-top:1.5rem}
+.points .num{display:block;font-family:var(--font-display);font-weight:900;font-stretch:72%;font-size:2.25rem;line-height:1;color:var(--lime);margin-bottom:.9rem}
+.points h3{color:var(--on-green);margin-bottom:.5rem;font-size:1.2rem}
+.points p{color:var(--on-green-2)}
+@media (prefers-reduced-motion:no-preference){
+  .js .compare .check-list li{opacity:0;transform:translateX(-8px);transition:opacity .45s var(--ease),transform .45s var(--ease);transition-delay:calc(.35s + var(--i,0) * .09s)}
+  .js .compare.is-visible .check-list li{opacity:1;transform:none}
+  .js .compare .compare-result{opacity:0;transform:translateY(6px);transition:opacity .5s var(--ease) 1.2s,transform .5s var(--ease) 1.2s}
+  .js .compare.is-visible .compare-result{opacity:1;transform:none}
+}
+
+/* ===================== How it works ===================== */
+.steps{display:grid;gap:1.1rem}
+@media (min-width:640px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1080px){.steps{grid-template-columns:repeat(4,1fr)}}
+.step{display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:1rem 1rem 1.6rem;box-shadow:var(--shadow-s)}
+.step-art{display:block;width:100%;height:auto;aspect-ratio:200/120;border-radius:16px;background:linear-gradient(160deg,var(--orange-tint),#FDEFE6 70%);margin-bottom:1.35rem}
+.step-num{align-self:flex-start;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.3rem .7rem;border-radius:999px;background:var(--orange);color:var(--ink);margin:0 .35rem .75rem}
+.step h3{margin:0 .35rem .45rem}
+.step p{margin-inline:.35rem;color:var(--ink-2);font-size:1rem}
+.sa-card{fill:#fff;stroke:rgba(22,32,26,.1)}
+.sa-ink{fill:var(--ink)}
+.sa-muted{fill:rgba(22,32,26,.14)}
+.sa-stroke{fill:none;stroke:var(--green);stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round}
+.sa-scan{fill:var(--orange)}
+.sa-db{fill:#fff;stroke:var(--green);stroke-width:3}
+.sa-arrow{fill:none;stroke:var(--orange-ink);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.sa-ok-bg{fill:var(--ok-bg)}
+.sa-ok{fill:none;stroke:var(--ok);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.sa-flag{fill:var(--flag)}
+.sa-flag-soft{fill:rgba(180,35,24,.3)}
+.sa-flag-bg{fill:var(--flag-bg)}
+.sa-x{fill:none;stroke:#fff;stroke-width:2.2;stroke-linecap:round}
+.sa-flag-stroke{fill:none;stroke:var(--flag);stroke-width:3.5;stroke-linecap:round}
+.sa-lime{fill:var(--lime)}
+@media (prefers-reduced-motion:no-preference){
+  .js .step .sa-scan{opacity:0}
+  .js .step.is-visible .sa-scan{animation:saScan 1.4s ease-in-out .5s 2 alternate both}
+  .js .step .sa-line{transform:scaleX(0);transform-box:fill-box;transform-origin:left center;transition:transform .6s var(--ease)}
+  .js .step.is-visible .sa-line{transform:none;transition-delay:calc(.45s + var(--i,0) * .1s)}
+  .js .step .sa-pop{opacity:0;transform:scale(.5);transform-box:fill-box;transform-origin:center;transition:opacity .4s,transform .5s var(--ease)}
+  .js .step.is-visible .sa-pop{opacity:1;transform:none;transition-delay:calc(.5s + var(--i,0) * .15s)}
+}
+@keyframes saScan{from{opacity:1;transform:translateY(0)}to{opacity:1;transform:translateY(64px)}}
+
+/* ===================== Custom allergens ===================== */
+.panel--cream{background:var(--paper)}
+.custom-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(2.5rem, 5vw, 4rem);align-items:start}
+@media (min-width:1060px){.custom-grid{grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr)}}
+.feature-list{display:grid;gap:1.6rem}
+.feature-list li{display:grid;grid-template-columns:auto 1fr;gap:1rem}
+.tile{width:2.9rem;height:2.9rem;border-radius:14px;display:grid;place-items:center;flex:none}
+.tile--green{background:var(--green);color:var(--lime)}
+.tile--orange{background:var(--orange);color:var(--ink)}
+.feature-list h3{font-size:1.1rem;margin-bottom:.25rem}
+.feature-list p{color:var(--ink-2);font-size:1rem}
+.audience{margin-top:2.25rem;padding:1.35rem 1.5rem;border-radius:var(--radius);background:var(--paper);border:1px solid var(--line);border-left:6px solid var(--orange)}
+.audience h3{font-size:1.05rem;margin-bottom:.35rem}
+.audience p{color:var(--ink-2);font-size:.98rem}
+
+.demo{background:#FFFFFF;border:1px solid var(--line);border-radius:var(--radius-l);box-shadow:var(--shadow);padding:clamp(1.15rem, 3vw, 2rem);container-type:inline-size}
+.demo-head{margin-bottom:1.5rem}
+.demo-head h3{font-family:var(--font-display);font-stretch:72%;font-weight:900;font-size:clamp(1.55rem, 1.25rem + 1.2vw, 2rem);letter-spacing:-.025em;line-height:1.05;margin:.8rem 0 .4rem}
+.demo-head p{color:var(--ink-2);font-size:.98rem}
+.demo-body{display:grid;grid-template-columns:minmax(0,1fr);gap:1.5rem}
+@container (min-width:640px){.demo-body{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.75rem}}
+.demo-label{font-size:.78rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);margin:0 0 .65rem}
+.demo-label span{font-weight:500;text-transform:none;letter-spacing:0}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.4rem}
+.chips-empty{font-size:.92rem;color:var(--ink-3);padding:.5rem 0}
+.chip{display:inline-flex;align-items:center;gap:.45rem;min-height:2.6rem;padding:.4rem .95rem .4rem .55rem;border-radius:999px;border:2px solid var(--field);background:var(--paper);color:var(--ink-2);font-weight:600;font-size:.92rem;line-height:1.15;text-align:left;cursor:pointer;transition:background-color .2s,border-color .2s,color .2s,transform .15s}
+.chip:hover{border-color:var(--ink);color:var(--ink)}
+.chip:active{transform:scale(.97)}
+.chip-ind{width:1.2rem;height:1.2rem;border-radius:50%;border:2px solid currentColor;display:grid;place-items:center;flex:none}
+.chip-ind .icon{width:.75rem;height:.75rem;stroke-width:3.4;opacity:0}
+.chip[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:var(--cream)}
+.chip[aria-pressed="true"] .chip-ind{background:var(--lime);border-color:var(--lime);color:var(--green)}
+.chip[aria-pressed="true"] .chip-ind .icon{opacity:1}
+.chip--custom[aria-pressed="true"]{background:var(--orange);border-color:var(--orange);color:var(--ink)}
+.chip--custom[aria-pressed="true"] .chip-ind{background:var(--ink);border-color:var(--ink);color:var(--orange)}
+.chip-wrap{display:inline-flex;align-items:center;gap:.15rem}
+.chip-remove{display:grid;place-items:center;width:2.25rem;height:2.25rem;border-radius:50%;border:0;background:transparent;color:var(--ink-2);cursor:pointer}
+.chip-remove:hover{background:rgba(22,32,26,.08);color:var(--ink)}
+.chip-remove .icon{width:1rem;height:1rem}
+.add-form label{display:block;font-weight:650;font-size:.95rem;margin-bottom:.5rem}
+.add-row{display:flex;gap:.5rem}
+.add-row input{flex:1;min-width:0;min-height:3rem;padding:.7rem 1.1rem;border-radius:999px;border:2px solid var(--field);background:#fff;color:var(--ink);font-size:1rem}
+.add-row input::placeholder{color:var(--ink-3)}
+.add-row input:focus-visible{outline:3px solid var(--ink);outline-offset:2px;border-color:var(--ink)}
+.add-msg{min-height:1.5em;margin-top:.45rem;font-size:.88rem;color:var(--ink-2)}
+.add-msg.is-error{color:var(--flag)}
+.quick{display:flex;flex-wrap:wrap;align-items:center;gap:.45rem;margin-top:.35rem;font-size:.9rem;color:var(--ink-3)}
+.quick [role="group"]{display:flex;flex-wrap:wrap;gap:.45rem}
+.quick-btn{min-height:2.3rem;padding:.3rem .85rem;border-radius:999px;border:2px dashed var(--field);background:transparent;color:var(--ink-2);font-weight:600;font-size:.88rem;cursor:pointer;transition:border-color .2s,color .2s,background-color .2s}
+.quick-btn:hover{border-style:solid;border-color:var(--orange-ink);color:var(--orange-ink);background:var(--orange-tint)}
+html:not(.js) .js-only{display:none}
+.demo-result{background:var(--cream);border:1px solid var(--line);border-radius:22px;padding:1.1rem}
+.demo-product{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem}
+.demo-product .thumb{width:3rem;height:3rem;border-radius:12px}
+.demo-product strong{display:block;font-size:1.02rem;line-height:1.25}
+.demo-product span{display:block;font-size:.85rem;color:var(--ink-3)}
+.demo-verdict{display:flex;align-items:flex-start;gap:.75rem;padding:.9rem 1rem;border-radius:16px;margin-bottom:.85rem;transition:background-color .3s,color .3s}
+.demo-verdict .icon{width:1.6rem;height:1.6rem;margin-top:.05rem}
+.demo-verdict strong{display:block;font-size:1.05rem;line-height:1.3}
+.demo-verdict .v-sub{display:block;font-size:.9rem;line-height:1.45;color:var(--ink-2)}
+.demo-verdict.is-flag{background:var(--flag-bg);color:var(--flag)}
+.demo-verdict.is-clear{background:var(--ok-bg);color:var(--ok)}
+.demo-verdict.is-empty{background:var(--cream-2);color:var(--ink-2)}
+.demo-list li{display:flex;align-items:center;gap:.65rem;padding:.55rem .1rem;border-top:1px solid var(--line);font-size:.97rem}
+.demo-list li:first-child{border-top:0}
+.demo-list .mark{width:1.45rem;height:1.45rem}
+.demo-list li.is-flag{color:var(--flag);font-weight:700}
+.demo-list .hits{margin-left:auto;font-size:.74rem;font-weight:700;color:#fff;background:var(--flag);padding:.2rem .55rem;border-radius:999px;white-space:nowrap}
+.demo-note{display:flex;gap:.55rem;margin-top:1.25rem;font-size:.86rem;color:var(--ink-3)}
+.demo-note .icon{margin-top:.1rem}
+
+/* ===================== Benefits ===================== */
+.benefits{display:grid;gap:1.1rem}
+@media (min-width:640px){.benefits{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1080px){.benefits{grid-template-columns:repeat(4,1fr)}}
+.benefit{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:1.75rem 1.5rem 1.9rem;box-shadow:var(--shadow-s)}
+.benefit .tile{margin-bottom:1.35rem}
+.benefit h3{margin-bottom:.5rem}
+.benefit p{color:var(--ink-2);font-size:1rem}
+
+/* ===================== FAQ ===================== */
+.faq-grid{display:grid;gap:2.5rem}
+@media (min-width:980px){
+  .faq-grid{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:4rem}
+  .faq-grid .section-head{position:sticky;top:7rem;align-self:start;margin-bottom:0}
+}
+.faq-list{border-top:2px solid var(--ink)}
+.faq-item{border-bottom:1px solid var(--line-strong)}
+.faq-item summary{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;padding:1.35rem .25rem;cursor:pointer;list-style:none;font-weight:650;font-size:1.1rem;line-height:1.4;border-radius:10px}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:"";flex:none;width:2.25rem;height:2.25rem;border-radius:50%;border:2px solid var(--ink);background:linear-gradient(var(--ink),var(--ink)) center/12px 2px no-repeat,linear-gradient(var(--ink),var(--ink)) center/2px 12px no-repeat;transition:transform .3s var(--ease),background-color .3s}
+.faq-item[open] summary::after{transform:rotate(45deg);background-color:var(--orange)}
+.faq-item summary:hover::after{background-color:var(--orange-tint)}
+.faq-item[open] summary:hover::after{background-color:var(--orange)}
+.faq-answer{padding:0 3.5rem 1.6rem .25rem;color:var(--ink-2);max-width:44em}
+.faq-answer p+p{margin-top:.75rem}
+
+/* ===================== Download CTA ===================== */
+.cta{padding-bottom:clamp(4.5rem, 3rem + 6vw, 7.5rem)}
+.cta-panel{background:var(--orange);color:var(--ink);border-radius:var(--panel-radius);padding:clamp(2.25rem, 6vw, 4.75rem);display:grid;gap:2.75rem;align-items:center;position:relative;overflow:hidden;isolation:isolate}
+@media (min-width:920px){.cta-panel{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)}}
+.cta-panel::before{content:"";position:absolute;z-index:-1;width:min(620px,130vw);aspect-ratio:1;right:-12%;bottom:-55%;border-radius:50%;background:#EF7041}
+.cta-panel::after{content:"";position:absolute;z-index:-1;width:min(520px,110vw);aspect-ratio:1;right:-20%;bottom:-20%;border-radius:50%;border:30px solid var(--green);border-color:var(--green) transparent transparent var(--green);transform:rotate(12deg)}
+.cta-panel h2{margin-bottom:1.1rem}
+.cta-panel h2 em{font-style:normal;color:var(--ink);background:var(--lime);padding:0 .12em;border-radius:.14em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.cta-panel .lead{color:var(--ink);margin-bottom:2rem}
+.store-buttons{display:flex;flex-wrap:wrap;gap:.75rem}
+.store-btn{display:inline-flex;align-items:center;gap:.75rem;min-height:3.6rem;padding:.6rem 1.35rem .6rem 1.05rem;border-radius:16px;background:var(--ink);color:var(--cream);text-decoration:none;transition:transform .2s var(--ease),background-color .2s}
+.store-btn:hover{transform:translateY(-2px);background:#000}
+.store-btn .icon{width:1.6rem;height:1.6rem;color:var(--lime)}
+.store-btn small{display:block;font-size:.72rem;font-weight:500;line-height:1.1;opacity:.9}
+.store-btn strong{display:block;font-size:1.08rem;line-height:1.2}
+.cta-fine{margin-top:1.4rem;font-size:.9rem;font-weight:500}
+.cta-fine a{color:var(--ink);font-weight:650}
+.cta-fine a:hover{color:var(--ink);text-decoration-thickness:3px}
+.list-card{position:relative;max-width:22rem;margin-inline:auto;background:var(--paper);border-radius:24px;padding:1.4rem;box-shadow:var(--shadow-l);transform:rotate(-3deg)}
+.list-card-title{display:flex;align-items:center;gap:.55rem;font-family:var(--font-display);font-stretch:72%;font-weight:900;font-size:1.35rem;letter-spacing:-.02em;margin-bottom:1rem}
+.list-card-title .tile{width:2.25rem;height:2.25rem;border-radius:11px}
+.list-card-chips{display:flex;flex-wrap:wrap;gap:.45rem}
+.list-card-chips span{padding:.42rem .8rem;border-radius:999px;font-weight:650;font-size:.88rem;background:var(--green);color:var(--cream)}
+.list-card-chips .is-custom{background:var(--orange);color:var(--ink)}
+.list-card-chips .is-add{background:transparent;color:var(--ink-2);border:2px dashed var(--field)}
+.list-card .pill--lime{position:absolute;top:-.8rem;right:1.2rem;transform:rotate(5deg);font-size:.8rem;padding:.35rem .8rem}
+
+/* ===================== Footer ===================== */
+.site-footer{background:var(--green);color:var(--on-green);margin:0 var(--panel-gap) var(--panel-gap);border-radius:var(--panel-radius);padding-block:clamp(2.5rem, 5vw, 4rem) 2rem;--wm-1:var(--cream);--wm-2:var(--lime)}
+.disclaimer{display:flex;gap:1rem;align-items:flex-start;padding:1.4rem 1.5rem;border-radius:var(--radius);background:rgba(0,0,0,.14);border:1px solid rgba(246,239,222,.14);margin-bottom:3rem}
+.disclaimer>.icon{width:1.6rem;height:1.6rem;color:var(--lime);margin-top:.1rem}
+.disclaimer h2{font-family:var(--font-body);font-stretch:100%;font-size:1rem;font-weight:700;letter-spacing:0;line-height:1.3;margin-bottom:.4rem;color:var(--on-green)}
+.disclaimer p{font-size:.93rem;color:var(--on-green-2)}
+.footer-grid{display:grid;gap:2.25rem}
+@media (min-width:780px){.footer-grid{grid-template-columns:1.5fr 1fr 1fr}}
+.footer-brand .brand{--wm-1:var(--on-green);--wm-2:var(--lime);--mk-circle:var(--lime);--mk-bars:var(--green)}
+.footer-brand p{margin-top:.9rem;max-width:22rem;color:var(--on-green-2)}
+.footer-col h2{font-family:var(--font-body);font-stretch:100%;font-size:.78rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;line-height:1.3;color:var(--lime);margin-bottom:.75rem}
+.footer-col ul{display:grid;gap:.1rem}
+.footer-col a{display:inline-flex;align-items:center;min-height:2.5rem;text-decoration:none;color:var(--on-green-2)}
+.footer-col a:hover{color:var(--lime);text-decoration:underline;text-underline-offset:.2em}
+.footer-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.75rem 1.5rem;margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid rgba(246,239,222,.16);font-size:.88rem;color:var(--on-green-2)}
+
+/* ===================== Scroll reveal ===================== */
+.js [data-reveal]{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}
+.js [data-reveal].is-visible{opacity:1;transform:none}
+
+/* ===================== Motion & contrast preferences ===================== */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important}
+  .js [data-reveal]{opacity:1;transform:none}
+  .btn:hover,.store-btn:hover{transform:none}
+}
+@media (forced-colors:active){
+  .nav-toggle-bars,.nav-toggle-bars::before,.nav-toggle-bars::after{background:CanvasText}
+  .nav-toggle[aria-expanded="true"] .nav-toggle-bars{background:transparent}
+  .chip[aria-pressed="true"]{outline:2px solid Highlight}
+  .hero h1 .hl,.cta-panel h2 em{forced-color-adjust:none}
+}
+</style>
+</head>
+<body id="top">
+
+<!-- ============ SVG sprite: icons, barcode, logo ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/></symbol>
+    <symbol id="i-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="m8 12.5 2.7 2.7L16 9.8"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5M12 7.5h.01"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-scan" viewBox="0 0 24 24"><path d="M3 7.5V5a2 2 0 0 1 2-2h2.5M16.5 3H19a2 2 0 0 1 2 2v2.5M21 16.5V19a2 2 0 0 1-2 2h-2.5M7.5 21H5a2 2 0 0 1-2-2v-2.5"/><path d="M7.5 8v8M10.5 8v8M13.5 8v8M16.5 8v8"/></symbol>
+    <symbol id="i-tag" viewBox="0 0 24 24"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8Z"/><path d="M7.5 7.5h.01"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M10 6h10M10 12h10M10 18h10"/><path d="m3.5 6 1.2 1.2L7 5M3.5 12l1.2 1.2L7 11M3.5 18l1.2 1.2L7 17"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 7v5l3.5 2"/></symbol>
+    <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 3.5 13.9 9a1.5 1.5 0 0 0 1 1l5.6 2-5.6 2a1.5 1.5 0 0 0-1 1L12 20.5 10.1 15a1.5 1.5 0 0 0-1-1L3.5 12l5.6-2a1.5 1.5 0 0 0 1-1Z"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 6h9M17 6h3M4 12h3M11 12h9M4 18h11M19 18h1"/><circle cx="15" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="18" r="2"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M10.5 18.5h3"/></symbol>
+    <symbol id="g-barcode" viewBox="0 0 100 40" preserveAspectRatio="none"><rect x="0" width="3" height="40"/><rect x="4.5" width="1.5" height="40"/><rect x="7.5" width="4" height="40"/><rect x="13" width="2" height="40"/><rect x="16.5" width="1.5" height="40"/><rect x="19.5" width="3" height="40"/><rect x="24" width="2" height="40"/><rect x="27.5" width="4" height="40"/><rect x="33" width="1.5" height="40"/><rect x="36" width="3" height="40"/><rect x="40.5" width="2" height="40"/><rect x="44" width="1.5" height="40"/><rect x="47" width="4" height="40"/><rect x="52.5" width="2" height="40"/><rect x="56" width="3" height="40"/><rect x="60.5" width="1.5" height="40"/><rect x="63.5" width="2" height="40"/><rect x="67" width="4" height="40"/><rect x="72.5" width="1.5" height="40"/><rect x="75.5" width="2" height="40"/><rect x="79" width="3" height="40"/><rect x="83.5" width="1.5" height="40"/><rect x="86.5" width="4" height="40"/><rect x="92" width="2" height="40"/><rect x="95.5" width="1.5" height="40"/><rect x="98" width="2" height="40"/></symbol>
+    <!--LOGO_SYMBOLS--><mask id="mse-check" maskUnits="userSpaceOnUse" x="0" y="0" width="200" height="200"><polyline points="58,104 88,134 144,76" fill="none" stroke="#ffffff" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/></mask><symbol id="logo-mark" viewBox="0 0 200 200"><circle cx="100" cy="100" r="96" fill="var(--mk-circle,#245A49)"/><path mask="url(#mse-check)" fill="var(--mk-bars,#E2EE6E)" d="M44 40h7v120h-7z M54 40h3v120h-3z M60 40h8v120h-8z M71 40h3v120h-3z M77 40h5v120h-5z M85 40h9v120h-9z M97 40h3v120h-3z M103 40h6v120h-6z M112 40h3v120h-3z M118 40h8v120h-8z M129 40h4v120h-4z M136 40h6v120h-6z M145 40h3v120h-3z M151 40h8v120h-8z"/></symbol><symbol id="logo-wordmark" viewBox="0 0 225.7 48"><g transform="translate(0 37.5) scale(0.047158)"><path fill="var(--wm-1,currentColor)" d="M49.0 0V-688H316.0L360.0 -445Q363.0 -427 368.0 -398.0Q373.0 -369 378.5 -338.0Q384.0 -307 388.0 -282H397.0Q401.0 -302 406.0 -330.5Q411.0 -359 416.0 -389.0Q421.0 -419 425.0 -445L467.0 -688H726.0V0H543.0V-211Q543.0 -261 545.0 -305.5Q547.0 -350 548.5 -384.0Q550.0 -418 550.0 -435H541.0Q539.0 -421 535.0 -401.5Q531.0 -382 528.0 -364.0Q525.0 -346 522.0 -334L458.0 0H312.0L249.0 -334Q247.0 -346 243.0 -364.0Q239.0 -382 236.0 -401.5Q233.0 -421 230.0 -435H222.0Q223.0 -410 224.5 -372.0Q226.0 -334 227.0 -292.0Q228.0 -250 228.0 -211V0ZM903.0 210Q870.0 210 840.0 204.0Q810.0 198 796.0 192V73H862.0Q880.0 73 889.5 62.5Q899.0 52 903.5 35.5Q908.0 19 910.0 0L765.0 -528H947.0L981.0 -299Q984.0 -283 986.5 -263.0Q989.0 -243 992.5 -225.0Q996.0 -207 997.0 -193H1005.0Q1007.0 -202 1009.0 -214.0Q1011.0 -226 1013.0 -241.0Q1015.0 -256 1017.5 -270.5Q1020.0 -285 1021.0 -299L1054.0 -528H1224.0L1089.0 13Q1077.0 62 1062.0 98.5Q1047.0 135 1025.5 160.0Q1004.0 185 974.5 197.5Q945.0 210 903.0 210ZM1485.0 12Q1433.0 12 1388.0 2.5Q1343.0 -7 1309.0 -31.0Q1275.0 -55 1255.5 -98.0Q1236.0 -141 1236.0 -208Q1236.0 -210 1236.0 -216.5Q1236.0 -223 1237.0 -227H1420.0Q1420.0 -222 1420.0 -217.0Q1420.0 -212 1420.0 -208Q1420.0 -181 1427.0 -167.0Q1434.0 -153 1447.0 -148.5Q1460.0 -144 1475.0 -144Q1484.0 -144 1491.0 -145.5Q1498.0 -147 1504.5 -150.5Q1511.0 -154 1515.5 -160.0Q1520.0 -166 1522.5 -174.0Q1525.0 -182 1525.0 -192Q1525.0 -211 1513.0 -223.5Q1501.0 -236 1481.0 -245.5Q1461.0 -255 1436.0 -264.0Q1411.0 -273 1384.5 -283.5Q1358.0 -294 1333.0 -309.5Q1308.0 -325 1288.0 -348.0Q1268.0 -371 1256.5 -404.0Q1245.0 -437 1245.0 -482Q1245.0 -542 1264.0 -583.5Q1283.0 -625 1316.5 -651.0Q1350.0 -677 1392.0 -689.0Q1434.0 -701 1481.0 -701Q1527.0 -701 1568.0 -690.0Q1609.0 -679 1640.0 -656.0Q1671.0 -633 1688.5 -595.5Q1706.0 -558 1706.0 -503V-479H1525.0V-489Q1525.0 -506 1521.5 -518.5Q1518.0 -531 1509.5 -538.5Q1501.0 -546 1483.0 -546Q1468.0 -546 1458.5 -540.5Q1449.0 -535 1444.5 -526.0Q1440.0 -517 1440.0 -505Q1440.0 -485 1452.0 -470.5Q1464.0 -456 1484.0 -446.0Q1504.0 -436 1529.0 -427.5Q1554.0 -419 1580.5 -408.5Q1607.0 -398 1632.0 -383.5Q1657.0 -369 1677.0 -346.5Q1697.0 -324 1709.0 -292.5Q1721.0 -261 1721.0 -217Q1721.0 -139 1692.0 -88.5Q1663.0 -38 1610.0 -13.0Q1557.0 12 1485.0 12ZM1888.0 12Q1856.0 12 1830.5 3.0Q1805.0 -6 1787.0 -24.0Q1769.0 -42 1759.5 -70.5Q1750.0 -99 1750.0 -136Q1750.0 -183 1766.0 -218.5Q1782.0 -254 1815.0 -276.5Q1848.0 -299 1896.0 -310.5Q1944.0 -322 2007.0 -322V-363Q2007.0 -379 2003.0 -388.5Q1999.0 -398 1990.5 -403.5Q1982.0 -409 1969.0 -409Q1957.0 -409 1948.0 -404.5Q1939.0 -400 1934.0 -391.5Q1929.0 -383 1929.0 -371V-362H1767.0Q1766.0 -366 1766.0 -369.5Q1766.0 -373 1766.0 -377Q1766.0 -427 1790.0 -463.5Q1814.0 -500 1860.5 -520.0Q1907.0 -540 1976.0 -540Q2028.0 -540 2074.5 -526.0Q2121.0 -512 2150.0 -476.5Q2179.0 -441 2179.0 -376V-154Q2179.0 -140 2186.0 -131.0Q2193.0 -122 2209.0 -122H2228.0V-8Q2210.0 1 2185.0 6.5Q2160.0 12 2132.0 12Q2103.0 12 2080.5 4.5Q2058.0 -3 2043.5 -16.5Q2029.0 -30 2025.0 -50H2020.0Q2008.0 -33 1990.5 -19.0Q1973.0 -5 1948.0 3.5Q1923.0 12 1888.0 12ZM1961.0 -119Q1973.0 -119 1981.5 -124.0Q1990.0 -129 1995.5 -137.5Q2001.0 -146 2004.0 -157.0Q2007.0 -168 2007.0 -181V-230Q1973.0 -230 1955.5 -221.5Q1938.0 -213 1931.5 -198.0Q1925.0 -183 1925.0 -165Q1925.0 -150 1929.5 -139.5Q1934.0 -129 1942.0 -124.0Q1950.0 -119 1961.0 -119ZM2275.0 0V-394H2223.0V-528H2275.0V-579Q2275.0 -645 2294.5 -679.0Q2314.0 -713 2347.0 -725.0Q2380.0 -737 2423.0 -737Q2435.0 -737 2452.5 -735.0Q2470.0 -733 2488.5 -729.0Q2507.0 -725 2517.0 -720V-603H2479.0Q2462.0 -603 2455.0 -595.0Q2448.0 -587 2448.0 -573V-528H2517.0V-394H2448.0V0ZM2758.0 12Q2685.0 12 2635.0 -16.0Q2585.0 -44 2560.5 -104.5Q2536.0 -165 2536.0 -264Q2536.0 -364 2563.0 -424.5Q2590.0 -485 2639.5 -512.5Q2689.0 -540 2760.0 -540Q2835.0 -540 2883.5 -514.0Q2932.0 -488 2955.5 -428.0Q2979.0 -368 2979.0 -264V-236H2712.0Q2712.0 -193 2716.0 -165.5Q2720.0 -138 2730.5 -124.5Q2741.0 -111 2760.0 -111Q2775.0 -111 2784.0 -116.0Q2793.0 -121 2798.0 -131.0Q2803.0 -141 2805.0 -156.5Q2807.0 -172 2807.0 -192H2977.0Q2977.0 -140 2964.0 -101.5Q2951.0 -63 2924.0 -38.0Q2897.0 -13 2856.0 -0.5Q2815.0 12 2758.0 12ZM2712.0 -318H2803.0Q2803.0 -346 2801.0 -365.0Q2799.0 -384 2794.0 -395.5Q2789.0 -407 2780.5 -412.0Q2772.0 -417 2759.0 -417Q2742.0 -417 2732.0 -407.0Q2722.0 -397 2717.5 -375.5Q2713.0 -354 2712.0 -318Z"/><path fill="var(--wm-2,currentColor)" d="M3038.0 0V-688H3485.0V-528H3231.0V-428H3445.0V-270H3231.0V-160H3491.0V0ZM3664.0 12Q3632.0 12 3606.5 3.0Q3581.0 -6 3563.0 -24.0Q3545.0 -42 3535.5 -70.5Q3526.0 -99 3526.0 -136Q3526.0 -183 3542.0 -218.5Q3558.0 -254 3591.0 -276.5Q3624.0 -299 3672.0 -310.5Q3720.0 -322 3783.0 -322V-363Q3783.0 -379 3779.0 -388.5Q3775.0 -398 3766.5 -403.5Q3758.0 -409 3745.0 -409Q3733.0 -409 3724.0 -404.5Q3715.0 -400 3710.0 -391.5Q3705.0 -383 3705.0 -371V-362H3543.0Q3542.0 -366 3542.0 -369.5Q3542.0 -373 3542.0 -377Q3542.0 -427 3566.0 -463.5Q3590.0 -500 3636.5 -520.0Q3683.0 -540 3752.0 -540Q3804.0 -540 3850.5 -526.0Q3897.0 -512 3926.0 -476.5Q3955.0 -441 3955.0 -376V-154Q3955.0 -140 3962.0 -131.0Q3969.0 -122 3985.0 -122H4004.0V-8Q3986.0 1 3961.0 6.5Q3936.0 12 3908.0 12Q3879.0 12 3856.5 4.5Q3834.0 -3 3819.5 -16.5Q3805.0 -30 3801.0 -50H3796.0Q3784.0 -33 3766.5 -19.0Q3749.0 -5 3724.0 3.5Q3699.0 12 3664.0 12ZM3737.0 -119Q3749.0 -119 3757.5 -124.0Q3766.0 -129 3771.5 -137.5Q3777.0 -146 3780.0 -157.0Q3783.0 -168 3783.0 -181V-230Q3749.0 -230 3731.5 -221.5Q3714.0 -213 3707.5 -198.0Q3701.0 -183 3701.0 -165Q3701.0 -150 3705.5 -139.5Q3710.0 -129 3718.0 -124.0Q3726.0 -119 3737.0 -119ZM4188.0 12Q4148.0 12 4118.0 0.0Q4088.0 -12 4072.0 -40.0Q4056.0 -68 4056.0 -112V-394H4004.0V-528H4062.0L4094.0 -688H4228.0V-528H4300.0V-394H4228.0V-170Q4228.0 -147 4234.5 -135.5Q4241.0 -124 4261.0 -124H4300.0V-5Q4281.0 0 4261.0 4.5Q4241.0 9 4222.5 10.5Q4204.0 12 4188.0 12ZM4532.0 12Q4480.0 12 4442.5 1.0Q4405.0 -10 4380.5 -30.5Q4356.0 -51 4344.0 -80.0Q4332.0 -109 4332.0 -145Q4332.0 -149 4332.5 -156.5Q4333.0 -164 4334.0 -172H4487.0Q4486.0 -164 4486.0 -159.5Q4486.0 -155 4486.0 -150Q4486.0 -137 4491.0 -127.5Q4496.0 -118 4506.0 -112.5Q4516.0 -107 4532.0 -107Q4542.0 -107 4551.5 -110.0Q4561.0 -113 4567.0 -121.0Q4573.0 -129 4573.0 -142Q4573.0 -163 4558.5 -174.5Q4544.0 -186 4519.5 -193.5Q4495.0 -201 4468.0 -210Q4444.0 -218 4421.0 -229.0Q4398.0 -240 4379.0 -257.5Q4360.0 -275 4348.5 -302.5Q4337.0 -330 4337.0 -371Q4337.0 -418 4353.0 -450.0Q4369.0 -482 4397.0 -502.5Q4425.0 -523 4461.0 -531.5Q4497.0 -540 4536.0 -540Q4575.0 -540 4609.0 -531.5Q4643.0 -523 4669.5 -505.5Q4696.0 -488 4710.5 -462.0Q4725.0 -436 4725.0 -400Q4725.0 -394 4724.5 -385.0Q4724.0 -376 4723.0 -370H4571.0V-385Q4571.0 -397 4566.5 -405.0Q4562.0 -413 4553.5 -417.0Q4545.0 -421 4533.0 -421Q4527.0 -421 4520.5 -420.0Q4514.0 -419 4508.5 -415.0Q4503.0 -411 4499.0 -405.0Q4495.0 -399 4495.0 -390Q4495.0 -374 4508.0 -364.0Q4521.0 -354 4542.5 -347.5Q4564.0 -341 4589.0 -332Q4613.0 -324 4640.0 -314.5Q4667.0 -305 4689.5 -288.0Q4712.0 -271 4726.0 -244.0Q4740.0 -217 4740.0 -176Q4740.0 -125 4724.0 -89.0Q4708.0 -53 4680.0 -30.5Q4652.0 -8 4614.0 2.0Q4576.0 12 4532.0 12Z"/></g></symbol><symbol id="mark-bars" viewBox="0 0 200 200"><path mask="url(#mse-check)" d="M44 40h7v120h-7z M54 40h3v120h-3z M60 40h8v120h-8z M71 40h3v120h-3z M77 40h5v120h-5z M85 40h9v120h-9z M97 40h3v120h-3z M103 40h6v120h-6z M112 40h3v120h-3z M118 40h8v120h-8z M129 40h4v120h-4z M136 40h6v120h-6z M145 40h3v120h-3z M151 40h8v120h-8z"/></symbol><!--/LOGO_SYMBOLS-->
+  </defs>
+</svg>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="#top">
+      <svg class="brand-mark" aria-hidden="true" focusable="false"><use href="#logo-mark"/></svg>
+      <svg class="brand-word" viewBox="0 0 225.7 48" aria-hidden="true" focusable="false"><use href="#logo-wordmark"/></svg>
+      <span class="sr-only">MySafeEats home</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      <span class="nav-toggle-bars" aria-hidden="true"></span>
+      <span class="sr-only">Menu</span>
+    </button>
+    <nav id="site-nav" class="site-nav" aria-label="Primary">
+      <ul role="list">
+        <li><a href="#ingredients-first">Ingredients first</a></li>
+        <li><a href="#how-it-works">How it works</a></li>
+        <li><a href="#custom-allergens">Your allergens</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <a class="btn btn-primary btn-sm" href="#download">Get the app</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ Hero ============ -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="panel hero-panel">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Made for people with celiac disease</p>
+          <h1 id="hero-title">Read the <span class="nowrap"><em class="hl">ingredients</em>,</span> not the marketing.</h1>
+          <p class="lead">MySafeEats scans a product’s barcode, pulls its full ingredient list, and checks every ingredient against a list of gluten-containing ingredients. Your answer is based on what’s actually in the food, not on what the front of the package claims.</p>
+          <div class="hero-actions">
+            <a class="btn btn-green btn-lg" href="#download">Get MySafeEats <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn btn-ghost btn-lg" href="#how-it-works">See how it works</a>
+          </div>
+          <ul class="hero-points" role="list">
+            <li><span class="mark" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Scans UPC barcodes</li>
+            <li><span class="mark" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Checks every listed ingredient</li>
+            <li><span class="mark" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Add your own allergens</li>
+          </ul>
+        </div>
+
+        <div class="hero-visual">
+          <div class="phone-wrap">
+            <div class="float float--claim" aria-hidden="true">
+              <span class="float-kicker">Front of package</span>
+              <span class="float-value">“Wheat free”</span>
+              <span class="float-note"><svg class="icon"><use href="#i-x"/></svg>Not used to decide</span>
+            </div>
+
+            <div class="phone" role="img" aria-label="MySafeEats app screen showing a scan result for a sample cereal labeled wheat free. The app checked all eight listed ingredients and flagged barley malt extract as a gluten-containing ingredient, so the product is marked not safe for this list.">
+              <div class="phone-screen">
+                <div class="ph-island"></div>
+                <div class="ph-status">
+                  <span>9:41</span>
+                  <svg viewBox="0 0 40 12"><rect x="0" y="7" width="3" height="5" rx="1"/><rect x="4.5" y="5" width="3" height="7" rx="1"/><rect x="9" y="2.5" width="3" height="9.5" rx="1"/><rect x="13.5" y="0" width="3" height="12" rx="1"/><rect x="21" y="1" width="17" height="10" rx="3" fill="none" stroke="currentColor" stroke-width="1.2"/><rect x="22.8" y="2.8" width="11" height="6.4" rx="1.6"/></svg>
+                </div>
+                <div class="ph-cam">
+                  <div class="ph-reticle">
+                    <div class="ph-label">
+                      <svg viewBox="0 0 100 40" preserveAspectRatio="none"><use href="#g-barcode"/></svg>
+                      <p>0 12345 67890 5</p>
+                    </div>
+                    <div class="ph-scan-track"><div class="ph-scan"></div></div>
+                  </div>
+                </div>
+                <div class="ph-sheet">
+                  <div class="ph-handle"></div>
+                  <div class="ph-product">
+                    <div class="thumb"></div>
+                    <div>
+                      <p class="ph-name">Cocoa Rice Crisps</p>
+                      <p class="ph-meta">Sample product · 8 ingredients checked</p>
+                    </div>
+                  </div>
+                  <div class="ph-verdict">
+                    <svg class="icon"><use href="#i-alert"/></svg>
+                    <div><strong>Not safe for your list</strong><span>Contains gluten: 1 ingredient matched</span></div>
+                  </div>
+                  <p class="ph-claim"><svg class="icon"><use href="#i-tag"/></svg>Front label: <s>“Wheat free”</s> (not used)</p>
+                  <ul class="ph-list">
+                    <li style="--i:0"><span class="mark mark--ok"><svg class="icon"><use href="#i-check"/></svg></span>Whole grain rice</li>
+                    <li style="--i:1"><span class="mark mark--ok"><svg class="icon"><use href="#i-check"/></svg></span>Cane sugar</li>
+                    <li style="--i:2"><span class="mark mark--ok"><svg class="icon"><use href="#i-check"/></svg></span>Cocoa powder</li>
+                    <li style="--i:3" class="is-flag"><span class="mark mark--flag"><svg class="icon"><use href="#i-x"/></svg></span>Barley malt extract<span class="tag">Gluten</span></li>
+                    <li style="--i:4"><span class="mark mark--ok"><svg class="icon"><use href="#i-check"/></svg></span>Sunflower oil</li>
+                    <li style="--i:5"><span class="mark mark--ok"><svg class="icon"><use href="#i-check"/></svg></span>Sea salt</li>
+                    <li style="--i:6"><span class="mark mark--ok"><svg class="icon"><use href="#i-check"/></svg></span>Soy lecithin</li>
+                    <li style="--i:7"><span class="mark mark--ok"><svg class="icon"><use href="#i-check"/></svg></span>Natural vanilla flavor</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="float float--found" aria-hidden="true">
+              <span class="float-kicker">Ingredient list</span>
+              <span class="float-value">Barley malt extract</span>
+              <span class="float-note"><svg class="icon"><use href="#i-alert"/></svg>Contains gluten</span>
+            </div>
+
+            <svg class="sticker" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+              <defs><path id="sticker-path" d="M60 60m-43 0a43 43 0 1 1 86 0a43 43 0 1 1-86 0"/></defs>
+              <circle class="sticker-bg" cx="60" cy="60" r="60"/>
+              <text class="sticker-text"><textPath href="#sticker-path" textLength="268" lengthAdjust="spacing">INGREDIENTS FIRST • INGREDIENTS FIRST •</textPath></text>
+              <use class="sticker-fork" href="#mark-bars" x="38" y="38" width="44" height="44"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Ingredients first ============ -->
+  <section id="ingredients-first" class="panel-gap-top" aria-labelledby="if-title">
+    <div class="panel panel--green on-green section">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">The difference</p>
+          <h2 id="if-title">Labels lead with claims. MySafeEats leads with <em>ingredients</em>.</h2>
+          <p class="lead">The front of a package is designed to sell. Phrases like “wheat free,” “made with whole grains,” or “all natural” can sound reassuring while telling you very little about gluten. The ingredient list is where the facts are, so that’s where MySafeEats looks first.</p>
+        </div>
+
+        <div class="compare" data-reveal>
+          <article class="compare-card compare-card--claims" aria-labelledby="cmp-claims">
+            <header class="compare-head">
+              <span class="compare-icon" aria-hidden="true"><svg class="icon"><use href="#i-tag"/></svg></span>
+              <div>
+                <p class="compare-kicker">What the box says</p>
+                <h3 id="cmp-claims">Front-of-package claims</h3>
+              </div>
+            </header>
+            <ul class="claims" role="list" aria-label="Example claims on a sample cereal box">
+              <li class="claim claim--seal">Wheat free</li>
+              <li class="claim">Made with whole grain rice</li>
+              <li class="claim">All natural</li>
+            </ul>
+            <p class="compare-foot"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg>Not used to decide your result</p>
+          </article>
+
+          <div class="compare-arrow" aria-hidden="true"><span><svg class="icon"><use href="#i-arrow"/></svg></span></div>
+
+          <article class="compare-card compare-card--facts" aria-labelledby="cmp-facts">
+            <header class="compare-head">
+              <span class="compare-icon" aria-hidden="true"><svg class="icon"><use href="#i-list"/></svg></span>
+              <div>
+                <p class="compare-kicker">What MySafeEats reads</p>
+                <h3 id="cmp-facts">The ingredient list</h3>
+              </div>
+            </header>
+            <ul class="check-list" role="list" aria-label="Eight ingredients checked, one flagged">
+              <li style="--i:0"><span class="mark mark--ok" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Whole grain rice</li>
+              <li style="--i:1"><span class="mark mark--ok" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Cane sugar</li>
+              <li style="--i:2"><span class="mark mark--ok" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Cocoa powder</li>
+              <li style="--i:3" class="is-flag"><span class="mark mark--flag" aria-hidden="true"><svg class="icon"><use href="#i-x"/></svg></span><span class="sr-only">Flagged:</span> Barley malt extract <span class="pill pill--flag">Gluten</span></li>
+              <li style="--i:4"><span class="mark mark--ok" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Sunflower oil</li>
+              <li style="--i:5"><span class="mark mark--ok" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Sea salt</li>
+              <li style="--i:6"><span class="mark mark--ok" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Soy lecithin</li>
+              <li style="--i:7"><span class="mark mark--ok" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Natural vanilla flavor</li>
+            </ul>
+            <p class="compare-result"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg><span><strong>Result:</strong> not safe for your list (barley malt extract)</span></p>
+          </article>
+        </div>
+
+        <ol class="points" role="list">
+          <li data-reveal>
+            <span class="num" aria-hidden="true">01</span>
+            <h3>“Wheat free” isn’t gluten-free.</h3>
+            <p>Barley and rye contain gluten too. Checking each ingredient catches what a single claim can leave out.</p>
+          </li>
+          <li data-reveal style="--d:.1s">
+            <span class="num" aria-hidden="true">02</span>
+            <h3>Every ingredient, individually.</h3>
+            <p>Each listed ingredient is compared against the gluten list, so one buried in the middle of a long list still gets checked.</p>
+          </li>
+          <li data-reveal style="--d:.2s">
+            <span class="num" aria-hidden="true">03</span>
+            <h3>Facts over phrasing.</h3>
+            <p>Your result comes from ingredient data, not branding, packaging design, or marketing language.</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ How it works ============ -->
+  <section id="how-it-works" class="section" aria-labelledby="how-title">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">How it works</p>
+        <h2 id="how-title">From barcode to answer in <em>four steps</em>.</h2>
+        <p class="lead">No typing product names. No hunting through fine print. Just scan and see.</p>
+      </div>
+
+      <ol class="steps" role="list">
+        <li class="step" data-reveal>
+          <svg class="step-art" viewBox="0 0 200 120" aria-hidden="true" focusable="false">
+            <rect class="sa-card" x="50" y="26" width="100" height="68" rx="9"/>
+            <use href="#g-barcode" class="sa-ink" x="62" y="36" width="76" height="36"/>
+            <rect class="sa-muted" x="70" y="79" width="60" height="5" rx="2.5"/>
+            <path class="sa-stroke" d="M34 34V22a6 6 0 0 1 6-6h12M148 16h12a6 6 0 0 1 6 6v12M166 86v12a6 6 0 0 1-6 6h-12M52 104H40a6 6 0 0 1-6-6V86"/>
+            <rect class="sa-scan" x="40" y="26" width="120" height="3" rx="1.5"/>
+          </svg>
+          <span class="step-num">Step 1</span>
+          <h3>Scan the UPC</h3>
+          <p>Point your phone’s camera at the barcode on a packaged food. That’s the only thing you have to do.</p>
+        </li>
+        <li class="step" data-reveal style="--d:.08s">
+          <svg class="step-art" viewBox="0 0 200 120" aria-hidden="true" focusable="false">
+            <g class="sa-db">
+              <path d="M28 36v46c0 4.4 10.7 8 24 8s24-3.6 24-8V36"/>
+              <path d="M28 59c0 4.4 10.7 8 24 8s24-3.6 24-8"/>
+              <ellipse cx="52" cy="36" rx="24" ry="8"/>
+            </g>
+            <path class="sa-arrow" d="M88 60h20m-7-7 7 7-7 7"/>
+            <rect class="sa-card" x="120" y="18" width="56" height="84" rx="8"/>
+            <rect class="sa-ink" x="129" y="28" width="28" height="5" rx="2.5"/>
+            <rect class="sa-muted sa-line" style="--i:0" x="129" y="42" width="38" height="4" rx="2"/>
+            <rect class="sa-muted sa-line" style="--i:1" x="129" y="52" width="32" height="4" rx="2"/>
+            <rect class="sa-muted sa-line" style="--i:2" x="129" y="62" width="36" height="4" rx="2"/>
+            <rect class="sa-muted sa-line" style="--i:3" x="129" y="72" width="26" height="4" rx="2"/>
+            <rect class="sa-muted sa-line" style="--i:4" x="129" y="82" width="34" height="4" rx="2"/>
+            <rect class="sa-muted sa-line" style="--i:5" x="129" y="92" width="22" height="4" rx="2"/>
+          </svg>
+          <span class="step-num">Step 2</span>
+          <h3>Ingredients are retrieved</h3>
+          <p>MySafeEats uses the barcode to look up the product in a global food database and pulls its ingredient list.</p>
+        </li>
+        <li class="step" data-reveal style="--d:.16s">
+          <svg class="step-art" viewBox="0 0 200 120" aria-hidden="true" focusable="false">
+            <rect class="sa-card" x="36" y="14" width="128" height="92" rx="10"/>
+            <g class="sa-pop" style="--i:0"><circle class="sa-ok-bg" cx="54" cy="31" r="7"/><path class="sa-ok" d="M50.5 31.2l2.4 2.4 4.6-4.8"/></g>
+            <rect class="sa-muted" x="68" y="29" width="54" height="4.5" rx="2.25"/>
+            <g class="sa-pop" style="--i:1"><circle class="sa-ok-bg" cx="54" cy="50" r="7"/><path class="sa-ok" d="M50.5 50.2l2.4 2.4 4.6-4.8"/></g>
+            <rect class="sa-muted" x="68" y="48" width="66" height="4.5" rx="2.25"/>
+            <g class="sa-pop" style="--i:2"><circle class="sa-flag" cx="54" cy="69" r="7"/><path class="sa-x" d="M51.2 66.2l5.6 5.6M56.8 66.2l-5.6 5.6"/></g>
+            <rect class="sa-flag-soft" x="68" y="67" width="46" height="4.5" rx="2.25"/>
+            <rect class="sa-flag" x="122" y="63.5" width="30" height="11" rx="5.5"/>
+            <g class="sa-pop" style="--i:3"><circle class="sa-ok-bg" cx="54" cy="88" r="7"/><path class="sa-ok" d="M50.5 88.2l2.4 2.4 4.6-4.8"/></g>
+            <rect class="sa-muted" x="68" y="86" width="58" height="4.5" rx="2.25"/>
+          </svg>
+          <span class="step-num">Step 3</span>
+          <h3>Each ingredient is checked</h3>
+          <p>Every ingredient is compared against a list of identified gluten-containing ingredients, plus any allergens you’ve added.</p>
+        </li>
+        <li class="step" data-reveal style="--d:.24s">
+          <svg class="step-art" viewBox="0 0 200 120" aria-hidden="true" focusable="false">
+            <rect class="sa-card" x="30" y="22" width="140" height="76" rx="14"/>
+            <g class="sa-pop" style="--i:0">
+              <circle class="sa-flag-bg" cx="62" cy="60" r="17"/>
+              <path class="sa-flag-stroke" d="M62 52v9M62 67.5h.01"/>
+            </g>
+            <rect class="sa-flag" x="90" y="49" width="58" height="8" rx="4"/>
+            <rect class="sa-muted" x="90" y="64" width="42" height="6" rx="3"/>
+          </svg>
+          <span class="step-num">Step 4</span>
+          <h3>You get a clear result</h3>
+          <p>See at a glance whether anything on your list turned up, and which ingredient was flagged.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ Custom allergens ============ -->
+  <section id="custom-allergens" aria-labelledby="custom-title">
+    <div class="panel panel--cream section">
+      <div class="container">
+        <div class="section-head" data-reveal>
+          <p class="eyebrow">Customizable search</p>
+          <h2 id="custom-title">Your allergens. <em>Your list.</em></h2>
+          <p class="lead">Gluten is where MySafeEats starts, not where it stops. Choose exactly which ingredients it searches for, so every scan checks products against your own list.</p>
+        </div>
+
+        <div class="custom-grid">
+          <div data-reveal>
+            <ul class="feature-list" role="list">
+              <li>
+                <span class="tile tile--green" aria-hidden="true"><svg class="icon"><use href="#i-check-circle"/></svg></span>
+                <div><h3>Gluten list built in</h3><p>A list of identified gluten-containing ingredients is ready from your very first scan.</p></div>
+              </li>
+              <li>
+                <span class="tile tile--green" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span>
+                <div><h3>Add anything you avoid</h3><p>Sesame, soy, mustard, a specific additive: add the ingredient names that matter to you.</p></div>
+              </li>
+              <li>
+                <span class="tile tile--green" aria-hidden="true"><svg class="icon"><use href="#i-sliders"/></svg></span>
+                <div><h3>Fine-tune what’s checked</h3><p>Customize which ingredients MySafeEats searches for, so results reflect your needs.</p></div>
+              </li>
+              <li>
+                <span class="tile tile--green" aria-hidden="true"><svg class="icon"><use href="#i-scan"/></svg></span>
+                <div><h3>Checked on every scan</h3><p>Once an ingredient is on your list, every product you scan is checked against it automatically.</p></div>
+              </li>
+            </ul>
+            <div class="audience">
+              <h3>For celiac disease, and beyond</h3>
+              <p>Living with celiac disease plus other food allergies? Avoiding an ingredient most lists never mention? Your list adapts to you, not the other way around.</p>
+            </div>
+          </div>
+
+          <div class="demo" data-demo role="region" aria-labelledby="demo-title" data-reveal style="--d:.1s">
+            <div class="demo-head">
+              <span class="pill pill--lime">Interactive demo</span>
+              <h3 id="demo-title">Try it with a sample product</h3>
+              <p class="js-only">Add an ingredient, or tap one to switch it off, and watch the result update.</p>
+            </div>
+            <div class="demo-body">
+              <div class="demo-controls">
+                <h4 class="demo-label" id="gluten-label">Gluten list <span>(a few examples)</span></h4>
+                <div class="chips" role="group" aria-labelledby="gluten-label" data-chips="gluten">
+                  <button type="button" class="chip" aria-pressed="true" data-term="Wheat"><span class="chip-ind" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Wheat</button>
+                  <button type="button" class="chip" aria-pressed="true" data-term="Barley"><span class="chip-ind" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Barley</button>
+                  <button type="button" class="chip" aria-pressed="true" data-term="Rye"><span class="chip-ind" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Rye</button>
+                  <button type="button" class="chip" aria-pressed="true" data-term="Malt"><span class="chip-ind" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Malt</button>
+                  <button type="button" class="chip" aria-pressed="true" data-term="Spelt"><span class="chip-ind" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Spelt</button>
+                  <button type="button" class="chip" aria-pressed="true" data-term="Triticale"><span class="chip-ind" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Triticale</button>
+                  <button type="button" class="chip" aria-pressed="true" data-term="Brewer’s yeast"><span class="chip-ind" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Brewer’s yeast</button>
+                </div>
+
+                <div class="js-only">
+                  <h4 class="demo-label" id="custom-label">Your additions</h4>
+                  <div class="chips" role="group" aria-labelledby="custom-label" data-chips="custom">
+                    <p class="chips-empty">Nothing added yet.</p>
+                  </div>
+
+                  <form class="add-form" data-add-form novalidate>
+                    <label for="add-input">Add an ingredient to search for</label>
+                    <div class="add-row">
+                      <input id="add-input" name="ingredient" type="text" autocomplete="off" maxlength="40" placeholder="e.g., sesame" aria-describedby="add-msg">
+                      <button class="btn btn-primary" type="submit">Add</button>
+                    </div>
+                    <p id="add-msg" class="add-msg" aria-live="polite"></p>
+                  </form>
+
+                  <div class="quick">
+                    <span id="quick-label">Quick add:</span>
+                    <div role="group" aria-labelledby="quick-label" data-quick>
+                      <button type="button" class="quick-btn" data-term="Soy"><span aria-hidden="true">+ </span><span class="sr-only">Add </span>Soy</button>
+                      <button type="button" class="quick-btn" data-term="Sesame"><span aria-hidden="true">+ </span><span class="sr-only">Add </span>Sesame</button>
+                      <button type="button" class="quick-btn" data-term="Milk"><span aria-hidden="true">+ </span><span class="sr-only">Add </span>Milk</button>
+                      <button type="button" class="quick-btn" data-term="Corn"><span aria-hidden="true">+ </span><span class="sr-only">Add </span>Corn</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="demo-result">
+                <div class="demo-product">
+                  <div class="thumb" aria-hidden="true"></div>
+                  <div><strong>Cocoa Rice Crisps</strong><span>Sample product · front label says “wheat free”</span></div>
+                </div>
+                <div class="demo-verdict is-flag" data-verdict role="status" aria-atomic="true">
+                  <svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>
+                  <div><strong data-v-title>Not safe for your list</strong><span class="sr-only">. </span><span class="v-sub" data-v-sub>Contains gluten. 1 of 8 ingredients matched your list: barley malt extract.</span></div>
+                </div>
+                <ul class="demo-list" role="list" aria-label="Ingredients in the sample product" data-list>
+                  <li><span class="mark mark--ok" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Whole grain rice</li>
+                  <li><span class="mark mark--ok" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Cane sugar</li>
+                  <li><span class="mark mark--ok" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Cocoa powder</li>
+                  <li class="is-flag"><span class="mark mark--flag" aria-hidden="true"><svg class="icon"><use href="#i-x"/></svg></span><span class="sr-only">Flagged: </span>Barley malt extract<span class="hits">Barley, Malt</span></li>
+                  <li><span class="mark mark--ok" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Sunflower oil</li>
+                  <li><span class="mark mark--ok" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Sea salt</li>
+                  <li><span class="mark mark--ok" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Soy lecithin</li>
+                  <li><span class="mark mark--ok" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Natural vanilla flavor</li>
+                </ul>
+              </div>
+            </div>
+            <p class="demo-note"><svg class="icon" aria-hidden="true"><use href="#i-info"/></svg><span>This demo runs entirely in your browser with a sample product and a short example list. It isn’t connected to the app or its database.</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Benefits ============ -->
+  <section id="why" class="section" aria-labelledby="why-title">
+    <div class="container">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">Built for celiac life</p>
+        <h2 id="why-title">Confidence in the aisle, <em>without the fine print</em>.</h2>
+        <p class="lead">When gluten matters, every package is a decision. MySafeEats makes that decision faster and clearer, so shopping feels less like homework.</p>
+      </div>
+      <ul class="benefits" role="list">
+        <li class="benefit" data-reveal>
+          <span class="tile tile--orange" aria-hidden="true"><svg class="icon"><use href="#i-clock"/></svg></span>
+          <h3>Faster trips</h3>
+          <p>Scan instead of study. Spend less time turning over boxes and squinting at small print in the aisle.</p>
+        </li>
+        <li class="benefit" data-reveal style="--d:.08s">
+          <span class="tile tile--orange" aria-hidden="true"><svg class="icon"><use href="#i-list"/></svg></span>
+          <h3>Answers grounded in ingredients</h3>
+          <p>Results come from the ingredient list, so packaging and marketing language don’t steer the answer.</p>
+        </li>
+        <li class="benefit" data-reveal style="--d:.16s">
+          <span class="tile tile--orange" aria-hidden="true"><svg class="icon"><use href="#i-sparkle"/></svg></span>
+          <h3>Room to try new things</h3>
+          <p>Curious about a new brand or snack? Check it the same way you check your regulars: scan and see.</p>
+        </li>
+        <li class="benefit" data-reveal style="--d:.24s">
+          <span class="tile tile--orange" aria-hidden="true"><svg class="icon"><use href="#i-sliders"/></svg></span>
+          <h3>Fits your whole diet</h3>
+          <p>Start with gluten, then add whatever else you avoid. One scan checks everything on your list.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section id="faq" class="section" aria-labelledby="faq-title" style="padding-top:0">
+    <div class="container faq-grid">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">FAQ</p>
+        <h2 id="faq-title">Good questions, <em>straight answers</em>.</h2>
+        <p class="lead">Still wondering about something? <a href="mailto:hello@[your-domain.com]">Get in touch</a>.</p>
+      </div>
+      <div class="faq-list" data-reveal style="--d:.08s">
+        <details class="faq-item">
+          <summary>Does MySafeEats replace reading the label?</summary>
+          <div class="faq-answer"><p>No. MySafeEats is a shopping aid that helps you screen products quickly. Ingredient data can be incomplete or out of date, and recipes change, so always check the package before you eat something.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Where does the ingredient information come from?</summary>
+          <div class="faq-answer"><p>When you scan a UPC barcode, MySafeEats looks up the product in a global food database and retrieves the ingredient list on record for that product. That list is then checked against your ingredient list.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Which ingredients does it look for?</summary>
+          <div class="faq-answer"><p>By default, MySafeEats checks for ingredients identified as containing gluten, such as wheat, barley, rye, and malt. You can customize the list and add any other ingredients you want to avoid.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Can I use it for allergens other than gluten?</summary>
+          <div class="faq-answer"><p>Yes. Add any ingredient name to your list and every product you scan will be checked against it. That works whether you have celiac disease plus other sensitivities, or an allergen that standard lists don’t cover.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>Does it account for cross-contact or shared equipment?</summary>
+          <div class="faq-answer"><p>MySafeEats checks the ingredients listed for a product. Cross-contact risks, such as shared equipment or facilities, aren’t always part of an ingredient list. Check the package for advisory statements, and contact the manufacturer if you’re unsure.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>What if a product isn’t found or has no ingredient list?</summary>
+          <div class="faq-answer"><p>MySafeEats can only check ingredients it can retrieve. If a product isn’t in the database or its ingredient list is missing, read the package label directly.</p></div>
+        </details>
+        <details class="faq-item">
+          <summary>If a product is “safe for your list,” is it guaranteed gluten-free?</summary>
+          <div class="faq-answer"><p>No. “Safe for your list” means nothing on your list was found in the ingredient data available. It isn’t a guarantee or a certification. When in doubt, check the label and look for a certified gluten-free mark.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Download ============ -->
+  <section id="download" class="cta" aria-labelledby="download-title">
+    <div class="container">
+      <div class="cta-panel">
+        <div data-reveal>
+          <h2 id="download-title">Make your next grocery run <em>easier</em>.</h2>
+          <p class="lead">Download MySafeEats, set up your list, and start scanning. Ingredients first, every time.</p>
+          <!-- REPLACE: swap these for the official App Store / Google Play badges (required by Apple's and Google's brand guidelines) and set the real listing URLs. -->
+          <div class="store-buttons">
+            <a class="store-btn" href="#app-store-url">
+              <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
+              <span><small>Download for</small><strong>iPhone</strong></span>
+            </a>
+            <a class="store-btn" href="#google-play-url">
+              <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
+              <span><small>Download for</small><strong>Android</strong></span>
+            </a>
+          </div>
+          <p class="cta-fine">A shopping aid, not a substitute for reading labels. <a href="#disclaimer">Read the important information</a>.</p>
+        </div>
+        <div aria-hidden="true" data-reveal style="--d:.12s">
+          <div class="list-card">
+            <span class="pill pill--lime">Your list</span>
+            <p class="list-card-title"><span class="tile tile--green"><svg class="icon"><use href="#i-sliders"/></svg></span>What I avoid</p>
+            <div class="list-card-chips">
+              <span>Wheat</span><span>Barley</span><span>Rye</span><span>Malt</span><span>Spelt</span>
+              <span class="is-custom">Sesame</span><span class="is-custom">Mustard</span><span class="is-add">+ Add</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer on-green">
+  <div class="container">
+    <div id="disclaimer" class="disclaimer">
+      <svg class="icon" aria-hidden="true"><use href="#i-info"/></svg>
+      <div>
+        <h2 id="disclaimer-title">Important information</h2>
+        <p>MySafeEats is a shopping aid. It does not provide medical advice and is not a substitute for reading product labels or for guidance from a doctor, registered dietitian, or other qualified healthcare professional. Ingredient information comes from third-party sources and may be incomplete, inaccurate, or out of date, and manufacturers can change recipes at any time. A “safe for your list” result does not guarantee that a product is gluten-free or safe for you. Always read the label before eating, and talk with your healthcare provider about managing celiac disease or food allergies.</p>
+      </div>
+    </div>
+
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="#top">
+          <svg class="brand-mark" aria-hidden="true" focusable="false"><use href="#logo-mark"/></svg>
+          <svg class="brand-word" viewBox="0 0 225.7 48" aria-hidden="true" focusable="false"><use href="#logo-wordmark"/></svg>
+          <span class="sr-only">MySafeEats, back to top</span>
+        </a>
+        <p>Ingredients first. The gluten scanner built for people with celiac disease.</p>
+      </div>
+      <nav class="footer-col" aria-labelledby="footer-explore">
+        <h2 id="footer-explore">Explore</h2>
+        <ul role="list">
+          <li><a href="#ingredients-first">Ingredients first</a></li>
+          <li><a href="#how-it-works">How it works</a></li>
+          <li><a href="#custom-allergens">Your allergens</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+      <nav class="footer-col" aria-labelledby="footer-company">
+        <h2 id="footer-company">Company</h2>
+        <ul role="list">
+          <li><a href="#privacy-policy-url">Privacy policy</a></li>
+          <li><a href="#terms-url">Terms of use</a></li>
+          <li><a href="mailto:hello@[your-domain.com]">Contact us</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span data-year>2026</span> [Company Name]. All rights reserved.</p>
+      <p>MySafeEats does not provide medical advice.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  'use strict';
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  /* Footer year */
+  const year = document.querySelector('[data-year]');
+  if (year) year.textContent = String(new Date().getFullYear());
+
+  /* Header shadow on scroll */
+  const header = document.querySelector('.site-header');
+  const onScroll = () => header.classList.toggle('is-scrolled', window.scrollY > 8);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* Mobile navigation */
+  const toggle = header.querySelector('.nav-toggle');
+  const nav = document.getElementById('site-nav');
+  const setOpen = (open) => {
+    toggle.setAttribute('aria-expanded', String(open));
+    header.classList.toggle('nav-open', open);
+  };
+  toggle.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+  nav.addEventListener('click', (e) => { if (e.target.closest('a')) setOpen(false); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && header.classList.contains('nav-open')) { setOpen(false); toggle.focus(); }
+  });
+  document.addEventListener('click', (e) => {
+    if (header.classList.contains('nav-open') && !header.contains(e.target)) setOpen(false);
+  });
+  window.matchMedia('(min-width: 900px)').addEventListener('change', (e) => { if (e.matches) setOpen(false); });
+
+  /* Scroll reveal (progressive: content is visible without JS or with reduced motion) */
+  const revealEls = document.querySelectorAll('[data-reveal]');
+  if (!('IntersectionObserver' in window) || reduceMotion.matches) {
+    revealEls.forEach((el) => el.classList.add('is-visible'));
+  } else {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+    revealEls.forEach((el) => io.observe(el));
+  }
+
+  /* Interactive allergen demo */
+  const demo = document.querySelector('[data-demo]');
+  if (!demo) return;
+
+  const INGREDIENTS = ['Whole grain rice', 'Cane sugar', 'Cocoa powder', 'Barley malt extract',
+    'Sunflower oil', 'Sea salt', 'Soy lecithin', 'Natural vanilla flavor'];
+  const SVGNS = 'http://www.w3.org/2000/svg';
+  const norm = (s) => s.toLowerCase().replace(/[‘’]/g, "'").replace(/\s+/g, ' ').trim();
+  const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  /* Whole-word match with optional plural, so "malt" matches "barley malt extract" but not "maltodextrin" */
+  const pattern = (t) => new RegExp('(?:^|[^\\p{L}\\p{N}])' + esc(norm(t)) + '(?:e?s)?(?=$|[^\\p{L}\\p{N}])', 'u');
+  const icon = (id) => {
+    const svg = document.createElementNS(SVGNS, 'svg');
+    svg.setAttribute('class', 'icon');
+    svg.setAttribute('aria-hidden', 'true');
+    const use = document.createElementNS(SVGNS, 'use');
+    use.setAttribute('href', '#' + id);
+    svg.appendChild(use);
+    return svg;
+  };
+
+  const customGroup = demo.querySelector('[data-chips="custom"]');
+  const emptyMsg = customGroup.querySelector('.chips-empty');
+  const list = demo.querySelector('[data-list]');
+  const verdict = demo.querySelector('[data-verdict]');
+  const vIcon = verdict.querySelector('use');
+  const vTitle = verdict.querySelector('[data-v-title]');
+  const vSub = verdict.querySelector('[data-v-sub]');
+  const form = demo.querySelector('[data-add-form]');
+  const input = form.querySelector('input');
+  const msg = demo.querySelector('#add-msg');
+  const quickBtns = [...demo.querySelectorAll('[data-quick] button')];
+
+  const terms = [...demo.querySelectorAll('[data-chips="gluten"] .chip')].map((btn) => ({
+    name: btn.dataset.term, on: btn.getAttribute('aria-pressed') === 'true', custom: false, re: pattern(btn.dataset.term), btn
+  }));
+
+  const say = (text, isError = false) => { msg.textContent = text; msg.classList.toggle('is-error', isError); };
+  const setText = (el, text) => { if (el.textContent !== text) el.textContent = text; };
+  const syncQuick = () => quickBtns.forEach((b) => { b.hidden = terms.some((t) => norm(t.name) === norm(b.dataset.term)); });
+
+  function render() {
+    const active = terms.filter((t) => t.on);
+    const rows = INGREDIENTS.map((name) => ({ name, hits: active.filter((t) => t.re.test(norm(name))) }));
+
+    list.replaceChildren(...rows.map((r) => {
+      const li = document.createElement('li');
+      const flagged = r.hits.length > 0;
+      const mark = document.createElement('span');
+      mark.className = 'mark ' + (flagged ? 'mark--flag' : 'mark--ok');
+      mark.setAttribute('aria-hidden', 'true');
+      mark.appendChild(icon(flagged ? 'i-x' : 'i-check'));
+      li.appendChild(mark);
+      if (flagged) {
+        li.className = 'is-flag';
+        const sr = document.createElement('span');
+        sr.className = 'sr-only';
+        sr.textContent = 'Flagged: ';
+        li.appendChild(sr);
+      }
+      li.appendChild(document.createTextNode(r.name));
+      if (flagged) {
+        const tag = document.createElement('span');
+        tag.className = 'hits';
+        tag.textContent = r.hits.map((h) => h.name).join(', ');
+        li.appendChild(tag);
+      }
+      return li;
+    }));
+
+    const flagged = rows.filter((r) => r.hits.length);
+    const n = INGREDIENTS.length;
+    let state, title, sub, iconId;
+    if (!active.length) {
+      state = 'is-empty'; iconId = 'i-info';
+      title = 'Your list is empty';
+      sub = 'Switch on at least one ingredient to check this product.';
+    } else if (!flagged.length) {
+      state = 'is-clear'; iconId = 'i-check-circle';
+      title = 'Safe for your list';
+      sub = `None of the ${n} ingredients matched your list. Always check the label.`;
+    } else {
+      state = 'is-flag'; iconId = 'i-alert';
+      const gluten = flagged.some((r) => r.hits.some((h) => !h.custom));
+      title = 'Not safe for your list';
+      sub = `${gluten ? 'Contains gluten' : 'Contains an ingredient you avoid'}. ${flagged.length} of ${n} ingredients matched your list: ${flagged.map((r) => r.name.toLowerCase()).join(', ')}.`;
+    }
+    verdict.classList.remove('is-flag', 'is-clear', 'is-empty');
+    verdict.classList.add(state);
+    vIcon.setAttribute('href', '#' + iconId);
+    setText(vTitle, title);
+    setText(vSub, sub);
+  }
+
+  function addTerm(raw) {
+    const name = String(raw || '').replace(/\s+/g, ' ').trim().slice(0, 40);
+    if (!name) { say('Type an ingredient name first.', true); return null; }
+    if (!/[\p{L}\p{N}]/u.test(name)) { say('Use letters or numbers in the ingredient name.', true); return null; }
+
+    const existing = terms.find((t) => norm(t.name) === norm(name));
+    if (existing) {
+      if (!existing.on) {
+        existing.on = true;
+        existing.btn.setAttribute('aria-pressed', 'true');
+        render();
+        say(`${existing.name} is switched back on.`);
+      } else {
+        say(`${existing.name} is already on your list.`);
+      }
+      return existing;
+    }
+
+    const label = name.charAt(0).toUpperCase() + name.slice(1);
+    const wrap = document.createElement('span');
+    wrap.className = 'chip-wrap';
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'chip chip--custom';
+    btn.setAttribute('aria-pressed', 'true');
+    const ind = document.createElement('span');
+    ind.className = 'chip-ind';
+    ind.setAttribute('aria-hidden', 'true');
+    ind.appendChild(icon('i-check'));
+    btn.append(ind, document.createTextNode(label));
+    const rm = document.createElement('button');
+    rm.type = 'button';
+    rm.className = 'chip-remove';
+    rm.setAttribute('aria-label', `Remove ${label}`);
+    rm.appendChild(icon('i-x'));
+    wrap.append(btn, rm);
+    customGroup.appendChild(wrap);
+
+    const term = { name: label, on: true, custom: true, re: pattern(label), btn, rm, wrap };
+    terms.push(term);
+    emptyMsg.hidden = true;
+    syncQuick();
+    render();
+    say(`Added ${label}. The sample product was checked again.`);
+    return term;
+  }
+
+  function removeTerm(term) {
+    if (!term) return;
+    term.wrap.remove();
+    terms.splice(terms.indexOf(term), 1);
+    emptyMsg.hidden = terms.some((t) => t.custom);
+    syncQuick();
+    render();
+    say(`Removed ${term.name}.`);
+    input.focus();
+  }
+
+  demo.addEventListener('click', (e) => {
+    const chip = e.target.closest('.chip');
+    if (chip) {
+      const t = terms.find((x) => x.btn === chip);
+      if (t) { t.on = !t.on; chip.setAttribute('aria-pressed', String(t.on)); render(); }
+      return;
+    }
+    const rm = e.target.closest('.chip-remove');
+    if (rm) { removeTerm(terms.find((x) => x.rm === rm)); return; }
+    const quick = e.target.closest('[data-quick] button');
+    if (quick) { const t = addTerm(quick.dataset.term); if (t) t.btn.focus(); }
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const t = addTerm(input.value);
+    if (t) input.value = '';
+    input.focus();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
