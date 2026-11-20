@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MySafeEats Brand Guide</title>
+<meta name="description" content="Logo, color, typography, and voice guidelines for MySafeEats.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&display=swap">
+<style>
+:root{
+  --orange:#E65E2C;--orange-ink:#B4400F;--orange-tint:#FBE0D2;
+  --green:#245A49;--green-deep:#1C4A3B;--lime:#E2EE6E;
+  --cream:#F3E8D2;--cream-2:#EDE3CF;--paper:#FBF7EF;
+  --ink:#12261E;--ink-2:#3F4A43;--ink-3:#5F675F;
+  --flag:#B42318;--flag-bg:#FCE8E6;--ok-bg:#E1ECE4;
+  --line:rgba(22,32,26,.12);--field:#7A8078;
+  --font-display:"Archivo","Arial Narrow",Arial,sans-serif;
+  --font-body:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --gutter:clamp(1rem,4vw,2rem);
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--font-body);font-size:1rem;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,p,ul,ol,figure,table{margin:0}
+img{display:block;max-width:100%;height:auto}
+a{color:var(--orange-ink);text-underline-offset:.18em}
+:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+.container{width:min(100% - 2 * var(--gutter),1120px);margin-inline:auto}
+.display,h1,h2{font-family:var(--font-display);font-weight:900;font-stretch:72%;letter-spacing:-.012em;line-height:.95}
+h1{font-size:clamp(2.75rem,1.5rem + 5vw,5rem)}
+h2{font-size:clamp(2rem,1.4rem + 2.4vw,3rem);margin-bottom:.75rem}
+h3{font-size:1.1rem;line-height:1.3;margin-bottom:.35rem}
+.kicker{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--orange-ink);margin-bottom:.9rem}
+.muted{color:var(--ink-2)}
+.small{font-size:.88rem;color:var(--ink-3)}
+section{padding-block:clamp(3.5rem,7vw,6rem);border-top:1px solid var(--line)}
+.intro{max-width:44rem;margin-bottom:2.5rem}
+.grid{display:grid;gap:1rem}
+@media (min-width:700px){.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(2,1fr)}.g4{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1000px){.g4{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:repeat(3,1fr)}}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:1.4rem}
+
+/* Top */
+.top{padding:1rem 0}
+.top .container{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap}
+.top img{height:40px;width:auto}
+.top a.back{font-weight:600;color:var(--ink);text-decoration:none;border:2px solid var(--ink);padding:.5rem 1rem;border-radius:999px}
+.hero{margin:0 clamp(.5rem,1.4vw,1rem);border-radius:clamp(24px,4vw,44px);background:var(--orange);padding:clamp(3rem,7vw,5.5rem) 0;position:relative;overflow:hidden;isolation:isolate}
+.hero::before{content:"";position:absolute;z-index:-1;width:min(560px,90vw);aspect-ratio:1;border-radius:50%;background:var(--cream);right:-8%;top:50%;translate:0 -50%}
+.hero::after{content:"";position:absolute;z-index:-1;width:min(480px,80vw);aspect-ratio:1;border-radius:50%;border:34px solid var(--green);border-color:var(--green) var(--green) transparent transparent;right:-4%;top:-12%;transform:rotate(-18deg)}
+.hero-grid{display:grid;gap:2.5rem;align-items:center}
+@media (min-width:860px){.hero-grid{grid-template-columns:1.2fr .8fr}}
+.hero h1 em{font-style:normal;background:var(--lime);padding:0 .12em;border-radius:.14em;display:inline-block;transform:rotate(-2deg);box-shadow:0 .07em 0 var(--ink)}
+.hero p{font-size:1.2rem;max-width:32rem;margin-top:1.25rem}
+.hero-mark{width:min(240px,55vw);margin-inline:auto;filter:drop-shadow(0 30px 40px rgba(22,32,26,.35));transform:rotate(-6deg)}
+
+/* Logo */
+.logo-tile{border-radius:22px;padding:2.25rem 1.5rem;display:grid;place-items:center;min-height:170px;border:1px solid var(--line)}
+.logo-tile img{width:min(260px,100%)}
+.logo-tile.t-cream{background:var(--cream)}
+.logo-tile.t-paper{background:var(--paper)}
+.logo-tile.t-green{background:var(--green)}
+.logo-tile.t-orange{background:var(--orange)}
+.logo-tile.t-ink{background:var(--ink)}
+.tile-cap{margin-top:.75rem}
+.tile-cap b{display:block}
+.marks{display:flex;align-items:flex-end;gap:1.25rem;flex-wrap:wrap}
+.marks img{flex:none}
+.anatomy{display:grid;gap:1.5rem;align-items:center}
+@media (min-width:760px){.anatomy{grid-template-columns:auto 1fr}}
+.anatomy svg{width:min(200px,100%);height:auto;margin-inline:auto}
+.anatomy ol{padding-left:1.25rem;display:grid;gap:.75rem}
+.clear{display:inline-block;padding:clamp(12px,3vw,24px);border:2px dashed var(--orange-ink);border-radius:8px;background:repeating-linear-gradient(45deg,rgba(232,93,42,.08) 0 8px,transparent 8px 16px)}
+.clear img{width:min(320px,70vw);background:var(--cream)}
+.dont{position:relative;overflow:hidden}
+.dont .logo-tile{min-height:130px;padding:1.5rem}
+.dont .logo-tile img{width:200px}
+.dont-x{display:inline-flex;align-items:center;gap:.4rem;font-weight:700;color:var(--flag);margin-top:.75rem}
+.dont-x::before{content:"✕";display:grid;place-items:center;width:1.4rem;height:1.4rem;border-radius:50%;background:var(--flag);color:#fff;font-size:.75rem}
+.d-stretch img{width:150px!important;transform:scaleX(1.35)}
+.d-recolor img{filter:hue-rotate(150deg) saturate(1.6)}
+.d-shadow img{filter:drop-shadow(4px 6px 0 #000) blur(.3px)}
+
+/* Color */
+.swatch{border-radius:22px;overflow:hidden;border:1px solid var(--line);background:var(--paper)}
+.swatch-chip{height:130px;display:flex;align-items:flex-end;padding:1rem;font-family:var(--font-display);font-weight:900;font-stretch:72%;font-size:1.6rem;letter-spacing:-.02em}
+.swatch-body{padding:1rem 1.1rem 1.2rem;font-size:.9rem}
+.swatch-body b{font-size:1rem}
+.swatch-body code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.85rem;color:var(--ink)}
+.ratio{display:flex;height:56px;border-radius:16px;overflow:hidden;margin:1.5rem 0 .6rem;border:1px solid var(--line)}
+.ratio span{display:grid;place-items:center;font-size:.8rem;font-weight:700}
+table{width:100%;border-collapse:collapse;font-size:.95rem}
+.table-wrap{overflow-x:auto;background:var(--paper);border:1px solid var(--line);border-radius:22px}
+th,td{text-align:left;padding:.75rem 1rem;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+tr:last-child td{border-bottom:0}
+.aa::before{content:"Aa"}
+.aa{display:inline-grid;place-items:center;width:3rem;height:2.25rem;border-radius:10px;font-weight:800;font-size:1.1rem;border:1px solid var(--line)}
+.r-ok{color:#245A49;font-weight:700}
+.r-lg{color:var(--orange-ink);font-weight:700}
+.r-no{color:var(--flag);font-weight:700}
+
+/* Type */
+.spec{background:var(--paper);border:1px solid var(--line);border-radius:22px;padding:1.6rem}
+.spec .big{font-family:var(--font-display);font-weight:900;font-stretch:72%;font-size:clamp(3rem,2rem + 4vw,5.5rem);letter-spacing:-.035em;line-height:.9}
+.spec .body-big{font-size:clamp(2.25rem,1.6rem + 3vw,4rem);font-weight:600;letter-spacing:-.02em;line-height:1}
+.scale{display:grid;gap:.9rem;margin-top:1rem}
+.scale div{display:flex;align-items:baseline;gap:1rem;border-top:1px solid var(--line);padding-top:.9rem;flex-wrap:wrap}
+.scale small{width:9rem;flex:none;color:var(--ink-3);font-size:.8rem}
+
+/* Components */
+.btn{display:inline-flex;align-items:center;gap:.5rem;min-height:3rem;padding:.75rem 1.4rem;border-radius:999px;border:2px solid transparent;font-weight:650;text-decoration:none;font-size:1rem}
+.btn-primary{background:var(--orange);color:var(--ink)}
+.btn-green{background:var(--green);color:var(--cream)}
+.btn-ghost{border-color:var(--ink);color:var(--ink)}
+.row{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+.chip{display:inline-flex;align-items:center;gap:.45rem;padding:.45rem .95rem;border-radius:999px;font-weight:600;font-size:.92rem;border:2px solid var(--field);color:var(--ink-2);background:var(--paper)}
+.chip.on{background:var(--green);border-color:var(--green);color:var(--cream)}
+.chip.custom{background:var(--orange);border-color:var(--orange);color:var(--ink)}
+.state{display:flex;gap:.7rem;align-items:center;padding:.9rem 1rem;border-radius:16px;font-weight:700}
+.state small{display:block;font-weight:500;color:var(--ink-2)}
+.s-flag{background:var(--flag-bg);color:var(--flag)}
+.s-ok{background:var(--lime);color:var(--green)}
+.state i{font-style:normal;display:grid;place-items:center;width:1.8rem;height:1.8rem;border-radius:50%;flex:none;font-size:.9rem}
+.s-flag i{background:var(--flag);color:#fff}
+.s-ok i{background:var(--green);color:var(--lime)}
+
+/* Voice */
+.words{display:grid;gap:1rem}
+@media (min-width:700px){.words{grid-template-columns:1fr 1fr}}
+.words ul{padding-left:1.1rem;display:grid;gap:.35rem}
+.say{border-top:6px solid var(--green)}
+.avoid{border-top:6px solid var(--flag)}
+.rewrite{display:grid;gap:.6rem}
+.rewrite p{padding:.85rem 1rem;border-radius:14px}
+.rewrite .no{background:var(--flag-bg)}
+.rewrite .yes{background:var(--ok-bg)}
+
+/* Motifs */
+.motif{display:grid;place-items:center;height:150px;border-radius:18px;margin-bottom:.9rem;position:relative;overflow:hidden}
+.m-brackets{background:var(--green)}
+.m-brackets span{width:96px;height:64px;background:
+  linear-gradient(var(--lime),var(--lime)) top left/22px 4px no-repeat,linear-gradient(var(--lime),var(--lime)) top left/4px 22px no-repeat,
+  linear-gradient(var(--lime),var(--lime)) top right/22px 4px no-repeat,linear-gradient(var(--lime),var(--lime)) top right/4px 22px no-repeat,
+  linear-gradient(var(--lime),var(--lime)) bottom left/22px 4px no-repeat,linear-gradient(var(--lime),var(--lime)) bottom left/4px 22px no-repeat,
+  linear-gradient(var(--lime),var(--lime)) bottom right/22px 4px no-repeat,linear-gradient(var(--lime),var(--lime)) bottom right/4px 22px no-repeat}
+.m-arcs{background:var(--orange)}
+.m-arcs::before{content:"";position:absolute;width:180px;height:180px;border-radius:50%;background:var(--cream);right:-40px;bottom:-70px}
+.m-arcs::after{content:"";position:absolute;width:170px;height:170px;border-radius:50%;border:20px solid var(--green);border-color:var(--green) var(--green) transparent transparent;right:-10px;top:-30px;transform:rotate(-18deg)}
+.m-sticker{background:var(--cream)}
+.m-sticker svg{width:110px;height:110px}
+.m-dots{background:var(--orange);background-image:radial-gradient(rgba(22,32,26,.16) 1.4px,transparent 1.5px);background-size:16px 16px}
+.files li{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;padding:.75rem 0;border-bottom:1px solid var(--line)}
+.files ul{list-style:none;padding:0}
+.files code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.88rem}
+footer{padding:2.5rem 0 3rem;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="container">
+    <img src="logo/mysafeeats-logo.svg" alt="MySafeEats" width="303" height="64">
+    <a class="back" href="index.html">View the website</a>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="container hero-grid">
+      <div>
+        <p class="kicker" style="color:var(--ink)">Brand guide · v1.0</p>
+        <h1>Bold about <em>ingredients</em>. Honest about everything else.</h1>
+        <p>How MySafeEats looks, sounds, and shows up: logo, color, type, components, and voice, in one place.</p>
+      </div>
+      <img class="hero-mark" src="logo/mysafeeats-mark.svg" alt="" width="256" height="256">
+    </div>
+  </div>
+
+  <!-- Brand idea -->
+  <section aria-labelledby="idea">
+    <div class="container">
+      <p class="kicker">01 · Brand idea</p>
+      <h2 id="idea">Ingredients first.</h2>
+      <div class="intro">
+        <p class="muted">MySafeEats helps people with celiac disease shop with confidence by reading what’s actually in the food, not what the package advertises. Everything about the brand follows from that: it should feel energetic and confident (shopping shouldn’t feel clinical), and it should be scrupulously honest (health decisions deserve plain facts).</p>
+      </div>
+      <div class="grid g4">
+        <div class="card"><h3>Bold</h3><p class="muted">Big type, warm orange, confident layouts. We sound sure of what we check.</p></div>
+        <div class="card"><h3>Clear</h3><p class="muted">One idea per screen. Plain words. Results you can read at a glance.</p></div>
+        <div class="card"><h3>Grounded</h3><p class="muted">Facts over phrasing. We describe what the app does, never more.</p></div>
+        <div class="card"><h3>Warm</h3><p class="muted">On your side in the aisle. Friendly, never preachy or alarmist.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Logo -->
+  <section aria-labelledby="logo">
+    <div class="container">
+      <p class="kicker">02 · Logo</p>
+      <h2 id="logo">The logo</h2>
+      <div class="intro"><p class="muted">The Scan Check lockup pairs the mark (a check mark built from barcode bars) with an Archivo Black wordmark at 72% width. On light backgrounds “MySafe” is green and “Eats” is orange. Every file is drawn as vector outlines, so no font needs to be installed.</p></div>
+
+      <div class="grid g3">
+        <figure><div class="logo-tile t-cream"><img src="logo/mysafeeats-logo.svg" alt="MySafeEats primary logo on cream" width="303" height="64"></div>
+          <figcaption class="tile-cap"><b>Primary</b><span class="small">Cream, paper, and white. Green mark with lime bars; green and orange wordmark.</span></figcaption></figure>
+        <figure><div class="logo-tile t-green"><img src="logo/mysafeeats-logo-reverse.svg" alt="MySafeEats reverse logo on green" width="303" height="64"></div>
+          <figcaption class="tile-cap"><b>Reverse</b><span class="small">Green and other dark backgrounds. Lime mark; cream and lime wordmark.</span></figcaption></figure>
+        <figure><div class="logo-tile t-orange"><img src="logo/mysafeeats-logo-on-orange.svg" alt="MySafeEats logo on orange" width="303" height="64"></div>
+          <figcaption class="tile-cap"><b>On orange</b><span class="small">Hero panels and the app’s sign-in screen. Lime mark and lime wordmark.</span></figcaption></figure>
+        <figure><div class="logo-tile t-paper"><img src="logo/mysafeeats-logo-mono-ink.svg" alt="MySafeEats one-color ink logo" width="303" height="64"></div>
+          <figcaption class="tile-cap"><b>Mono ink</b><span class="small">One-color print, faxes, and light photography. The check is cut out.</span></figcaption></figure>
+        <figure><div class="logo-tile t-ink"><img src="logo/mysafeeats-logo-mono-cream.svg" alt="MySafeEats one-color cream logo on ink" width="303" height="64"></div>
+          <figcaption class="tile-cap"><b>Mono cream</b><span class="small">Ink, dark photography, or single-color print on dark stock.</span></figcaption></figure>
+        <figure><div class="logo-tile" style="background:var(--lime)"><img src="logo/mysafeeats-logo-stacked.svg" alt="MySafeEats stacked logo on lime" width="170" height="120" style="width:170px"></div>
+          <figcaption class="tile-cap"><b>Stacked</b><span class="small">Square spaces: social avatars, stickers, packaging.</span></figcaption></figure>
+      </div>
+
+      <div class="grid g2" style="margin-top:2.5rem">
+        <div class="card">
+          <h3>The mark &amp; app icon</h3>
+          <p class="muted" style="margin-bottom:1.25rem">The app icon puts the lime mark on an orange tile, with dark and tinted versions for iOS. At 40&nbsp;px and below (favicons, settings lists) the bars become a solid check so it stays crisp.</p>
+          <div class="marks">
+            <img src="logo/mysafeeats-app-icon.svg" alt="MySafeEats app icon" width="112" height="112">
+            <img src="logo/mysafeeats-app-icon-dark.svg" alt="MySafeEats app icon, dark" width="80" height="80">
+            <img src="logo/mysafeeats-app-icon-tinted.svg" alt="MySafeEats app icon, tinted" width="60" height="60">
+            <img src="logo/mysafeeats-mark.svg" alt="MySafeEats mark, green" width="60" height="60">
+            <img src="favicon.svg" alt="" width="32" height="32">
+            <img src="favicon.svg" alt="" width="16" height="16">
+          </div>
+        </div>
+        <div class="card anatomy">
+          <svg viewBox="0 0 200 200" role="img" aria-label="Mark anatomy: barcode bars visible only inside a check shape, on a lime circle">
+            <defs><mask id="anat" maskUnits="userSpaceOnUse" x="0" y="0" width="200" height="200"><polyline points="58,104 88,134 144,76" fill="none" stroke="#fff" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/></mask></defs>
+            <circle cx="100" cy="100" r="96" fill="#E2EE6E"/>
+            <path mask="url(#anat)" fill="#245A49" d="M44 40h7v120h-7z M54 40h3v120h-3z M60 40h8v120h-8z M71 40h3v120h-3z M77 40h5v120h-5z M85 40h9v120h-9z M97 40h3v120h-3z M103 40h6v120h-6z M112 40h3v120h-3z M118 40h8v120h-8z M129 40h4v120h-4z M136 40h6v120h-6z M145 40h3v120h-3z M151 40h8v120h-8z"/>
+            <path d="M44 40h7v120h-7z M54 40h3v120h-3z M60 40h8v120h-8z M71 40h3v120h-3z M77 40h5v120h-5z M85 40h9v120h-9z M97 40h3v120h-3z M103 40h6v120h-6z M112 40h3v120h-3z M118 40h8v120h-8z M129 40h4v120h-4z M136 40h6v120h-6z M145 40h3v120h-3z M151 40h8v120h-8z" fill="#245A49" opacity=".12"/>
+            <g font-family="Archivo,sans-serif" font-size="13" font-weight="800" fill="#FFF7EA"><circle cx="48" cy="34" r="11" fill="#12261E"/><text x="44" y="39">1</text><circle cx="158" cy="64" r="11" fill="#12261E"/><text x="154" y="69">2</text></g>
+          </svg>
+          <ol>
+            <li><b>Barcode bars.</b> <span class="muted">Fourteen bars of varied widths, like a UPC: the scan.</span></li>
+            <li><b>Check mark.</b> <span class="muted">The bars only show inside a check: a clear answer about what’s in the food.</span></li>
+          </ol>
+        </div>
+      </div>
+
+      <div class="grid g2" style="margin-top:2.5rem;align-items:center">
+        <div>
+          <h3>Clear space &amp; minimum size</h3>
+          <p class="muted">Keep clear space on every side equal to <b>¼ of the mark’s height</b>. Don’t use the lockup narrower than <b>120&nbsp;px</b> on screen (30&nbsp;mm in print). Below that, use the mark alone; it holds up down to 16&nbsp;px.</p>
+        </div>
+        <div><span class="clear"><img src="logo/mysafeeats-logo.svg" alt="Logo shown with its clear-space zone" width="303" height="64"></span></div>
+      </div>
+
+      <h3 style="margin-top:2.75rem;margin-bottom:1rem">Please don’t</h3>
+      <div class="grid g4">
+        <figure class="dont"><div class="logo-tile t-paper d-stretch"><img src="logo/mysafeeats-logo.svg" alt="Stretched logo (incorrect)" width="303" height="64"></div><figcaption class="dont-x">Stretch or squash it</figcaption></figure>
+        <figure class="dont"><div class="logo-tile t-paper d-recolor"><img src="logo/mysafeeats-logo.svg" alt="Recolored logo (incorrect)" width="303" height="64"></div><figcaption class="dont-x">Change the colors</figcaption></figure>
+        <figure class="dont"><div class="logo-tile t-orange"><img src="logo/mysafeeats-logo.svg" alt="Full-color logo on orange (incorrect)" width="303" height="64"></div><figcaption class="dont-x">Use the full-color logo on orange</figcaption></figure>
+        <figure class="dont"><div class="logo-tile t-paper d-shadow"><img src="logo/mysafeeats-logo.svg" alt="Logo with drop shadow (incorrect)" width="303" height="64"></div><figcaption class="dont-x">Add shadows or effects</figcaption></figure>
+      </div>
+      <p class="small" style="margin-top:1rem">Also avoid the crossed-grain symbol and other certification marks in our graphics. Those belong to their certifying organizations, and MySafeEats is not a certification.</p>
+    </div>
+  </section>
+
+  <!-- Color -->
+  <section aria-labelledby="color">
+    <div class="container">
+      <p class="kicker">03 · Color</p>
+      <h2 id="color">Color</h2>
+      <div class="intro"><p class="muted">Orange leads, green supports, lime adds the pop. Cream keeps everything warm and readable. Status colors (flag red, check green) are reserved for results and never used decoratively.</p></div>
+      <div class="grid g4">
+        <div class="swatch"><div class="swatch-chip" style="background:#E65E2C;color:#12261E">Orange</div><div class="swatch-body"><b>Primary</b><br><code>#E65E2C</code> · RGB 230 94 44<br><span class="small">Hero and CTA panels, primary buttons, the app icon tile.</span></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#245A49;color:#FFF7EA">Green</div><div class="swatch-body"><b>Secondary</b><br><code>#245A49</code> · RGB 36 90 73<br><span class="small">Dark sections, footer, the mark, “MySafe” in the wordmark.</span></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#E2EE6E;color:#12261E">Lime</div><div class="swatch-body"><b>Accent</b><br><code>#E2EE6E</code> · RGB 226 238 110<br><span class="small">The mark’s circle, highlights, “Safe for your list.” A little goes a long way.</span></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#F3E8D2;color:#12261E">Cream</div><div class="swatch-body"><b>Background</b><br><code>#F3E8D2</code> · RGB 243 232 210<br><span class="small">Page background. Paper <code>#FBF7EF</code> for cards and app screens.</span></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#12261E;color:#FFF7EA">Ink</div><div class="swatch-body"><b>Text</b><br><code>#12261E</code> · RGB 18 38 30<br><span class="small">All body text, including text on orange. Light cream <code>#FFF7EA</code> on dark.</span></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#B4400F;color:#fff">Orange Ink</div><div class="swatch-body"><b>Orange for text</b><br><code>#B4400F</code> · RGB 180 64 15<br><span class="small">Orange headings, links, and labels on light backgrounds.</span></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#B42318;color:#fff">Flag</div><div class="swatch-body"><b>Status: not safe</b><br><code>#B42318</code> · tint <code>#FCE8E6</code><br><span class="small">Only for “Not safe for your list” and matched ingredients.</span></div></div>
+        <div class="swatch"><div class="swatch-chip" style="background:#E2EE6E;color:#245A49">Safe</div><div class="swatch-body"><b>Status: safe</b><br><code>#245A49</code> on <code>#E2EE6E</code><br><span class="small">“Safe for your list.” Checked ingredients use green on <code>#E3EDE7</code>.</span></div></div>
+      </div>
+
+      <div class="ratio" role="img" aria-label="Suggested color proportions: cream 50 percent, orange 20, green 20, lime 5, ink 5">
+        <span style="flex:50;background:var(--cream)">Cream 50%</span>
+        <span style="flex:20;background:var(--orange)">Orange 20%</span>
+        <span style="flex:20;background:var(--green);color:var(--cream)">Green 20%</span>
+        <span style="flex:5;background:var(--lime)">5%</span>
+        <span style="flex:5;background:var(--ink);color:var(--cream)">5%</span>
+      </div>
+      <p class="small">Rough proportions for a typical page. Lime and ink stay as accents.</p>
+
+      <h3 style="margin:2.5rem 0 1rem">Accessible pairings (WCAG 2.2)</h3>
+      <div class="table-wrap" role="region" aria-label="Accessible color pairings" tabindex="0">
+        <table>
+          <thead><tr><th scope="col">Sample</th><th scope="col">Text on background</th><th scope="col">Contrast</th><th scope="col">Use for</th></tr></thead>
+          <tbody>
+            <tr><td><span aria-hidden="true" class="aa" style="background:#F3E8D2;color:#12261E"></span></td><td>Ink on Cream</td><td>13.1:1</td><td class="r-ok">Any text</td></tr>
+            <tr><td><span aria-hidden="true" class="aa" style="background:#E65E2C;color:#12261E"></span></td><td>Ink on Orange</td><td>4.5:1</td><td class="r-ok">Any text (the only text color on orange)</td></tr>
+            <tr><td><span aria-hidden="true" class="aa" style="background:#E2EE6E;color:#12261E"></span></td><td>Ink on Lime</td><td>12.6:1</td><td class="r-ok">Any text</td></tr>
+            <tr><td><span aria-hidden="true" class="aa" style="background:#245A49;color:#FFF7EA"></span></td><td>Light cream on Green</td><td>7.5:1</td><td class="r-ok">Any text</td></tr>
+            <tr><td><span aria-hidden="true" class="aa" style="background:#245A49;color:#E2EE6E"></span></td><td>Lime on Green</td><td>6.3:1</td><td class="r-ok">Any text</td></tr>
+            <tr><td><span aria-hidden="true" class="aa" style="background:#E2EE6E;color:#245A49"></span></td><td>Green on Lime</td><td>6.3:1</td><td class="r-ok">Any text (the “safe” result)</td></tr>
+            <tr><td><span aria-hidden="true" class="aa" style="background:#F3E8D2;color:#B4400F"></span></td><td>Orange Ink on Cream</td><td>4.7:1</td><td class="r-ok">Any text</td></tr>
+            <tr><td><span aria-hidden="true" class="aa" style="background:#B42318;color:#FFFFFF"></span></td><td>White on Flag</td><td>6.6:1</td><td class="r-ok">Any text (the “not safe” result)</td></tr>
+            <tr><td><span aria-hidden="true" class="aa" style="background:#FCE8E6;color:#B42318"></span></td><td>Flag on Flag tint</td><td>5.6:1</td><td class="r-ok">Any text</td></tr>
+            <tr><td><span aria-hidden="true" class="aa" style="background:#E65E2C;color:#FFFFFF"></span></td><td>White on Orange</td><td>3.5:1</td><td class="r-lg">Large text only (24px+, or 19px+ bold)</td></tr>
+            <tr><td><span aria-hidden="true" class="aa" style="background:#F3E8D2;color:#E65E2C"></span></td><td>Orange on Cream</td><td>2.9:1</td><td class="r-no">Logo and decoration only, never text</td></tr>
+            <tr><td><span aria-hidden="true" class="aa" style="background:#E65E2C;color:#E2EE6E"></span></td><td>Lime on Orange</td><td>2.8:1</td><td class="r-no">Logo and decoration only, never text</td></tr>
+            <tr><td><span aria-hidden="true" class="aa" style="background:#E65E2C;color:#245A49"></span></td><td>Green on Orange</td><td>2.3:1</td><td class="r-no">Decoration only, never text</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Type -->
+  <section aria-labelledby="type">
+    <div class="container">
+      <p class="kicker">04 · Typography</p>
+      <h2 id="type">Typography</h2>
+      <div class="intro"><p class="muted">One free Google Fonts family (SIL Open Font License): Archivo. Its Black weight at 72% width is the wordmark and headline voice; regular widths keep app text and ingredient lists easy to read.</p></div>
+      <div class="grid g2">
+        <div class="spec">
+          <p class="small">Display · Archivo Black (900), width 72%, tracking −1.5%</p>
+          <p class="big" style="margin:.75rem 0">Aa Bb 123</p>
+          <p class="muted">The wordmark, headlines, result titles, and stickers. Set tight: line-height 0.9–1.</p>
+        </div>
+        <div class="spec">
+          <p class="small">Text · Archivo Regular–Bold (400–700), width 100%</p>
+          <p class="body-big" style="margin:.75rem 0">Aa Bb 123</p>
+          <p class="muted">Body copy, UI, buttons, ingredient lists. Body at 17px / 1.6; never below 14px.</p>
+        </div>
+      </div>
+      <div class="scale" aria-label="Type scale">
+        <div><small>H1 · 48–96px</small><span class="display" style="font-size:clamp(2rem,1rem + 3vw,3.5rem)">Read the ingredients</span></div>
+        <div><small>H2 · 35–64px</small><span class="display" style="font-size:clamp(1.6rem,1rem + 2vw,2.5rem)">Your allergens. Your list.</span></div>
+        <div><small>H3 · 19px Archivo 700</small><span style="font-weight:700;font-size:1.2rem">Each ingredient is checked</span></div>
+        <div><small>Lead · 18–21px</small><span style="font-size:1.2rem;color:var(--ink-2)">No typing, no searching, no squinting at fine print.</span></div>
+        <div><small>Body · 17px</small><span>MySafeEats checks every listed ingredient against your list.</span></div>
+        <div><small>Label · 13px caps</small><span style="font-size:.8rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--orange-ink)">How it works</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Components -->
+  <section aria-labelledby="ui">
+    <div class="container">
+      <p class="kicker">05 · Components</p>
+      <h2 id="ui">Interface elements</h2>
+      <div class="grid g3" style="margin-top:1.5rem">
+        <div class="card">
+          <h3>Buttons</h3>
+          <p class="small" style="margin-bottom:1rem">Pill-shaped, 48px minimum height. Orange with ink text on light backgrounds; green on orange.</p>
+          <div class="row"><span class="btn btn-primary">Get the app</span><span class="btn btn-green">Get MySafeEats →</span><span class="btn btn-ghost">See how it works</span></div>
+        </div>
+        <div class="card">
+          <h3>Ingredient chips</h3>
+          <p class="small" style="margin-bottom:1rem">Green = built-in gluten list. Orange = your additions. Outline = switched off.</p>
+          <div class="row"><span class="chip on">✓ Barley</span><span class="chip on">✓ Malt</span><span class="chip custom">✓ Sesame</span><span class="chip">Rye</span></div>
+        </div>
+        <div class="card">
+          <h3>Result states</h3>
+          <p class="small" style="margin-bottom:1rem">Always pair color with an icon and words, and scope the title to the person’s list. Never use brand orange for status.</p>
+          <div style="display:grid;gap:.6rem">
+            <div class="state s-flag"><i aria-hidden="true">✕</i><span>Not safe for your list<small>Contains gluten: 1 ingredient matched</small></span></div>
+            <div class="state s-ok"><i aria-hidden="true">✓</i><span>Safe for your list<small>None of your ingredients found. Not a guarantee</small></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Voice -->
+  <section aria-labelledby="voice">
+    <div class="container">
+      <p class="kicker">06 · Voice &amp; tone</p>
+      <h2 id="voice">How we talk</h2>
+      <div class="intro"><p class="muted">Confident about what the app does, careful about what it doesn’t. The name includes “Safe,” so results are always scoped: “Safe for your list” or “Not safe for your list,” never a bare “safe.” We describe a check against the person’s list, not a verdict on their health.</p></div>
+      <div class="words">
+        <div class="card say"><h3>Say</h3><ul>
+          <li>“Checks every listed ingredient”</li>
+          <li>“Safe for your list” / “Not safe for your list”</li>
+          <li>“Flagged” / “Matched your list”</li>
+          <li>“Can’t check this one” (no ingredient data)</li>
+          <li>“Ingredients first”</li>
+          <li>“A shopping aid. Always read the label.”</li>
+          <li>“Your list” / “ingredients you avoid”</li>
+        </ul></div>
+        <div class="card avoid"><h3>Avoid</h3><ul>
+          <li>“Safe to eat,” “guaranteed,” “100% gluten-free”</li>
+          <li>“Certified,” “approved,” “doctor-recommended”</li>
+          <li>Medical claims (“prevents reactions,” “protects your health”)</li>
+          <li>Invented statistics, testimonials, or accuracy rates</li>
+          <li>Fear-based language (“toxic,” “poison”)</li>
+          <li>Knocking other apps or brands by name</li>
+        </ul></div>
+      </div>
+      <div class="grid g2" style="margin-top:1.25rem">
+        <div class="card rewrite"><h3>Rewrite</h3>
+          <p class="no">✕ “MySafeEats tells you which foods are safe.”</p>
+          <p class="yes">✓ “MySafeEats checks a product’s ingredient list against your list and shows whether it’s safe for your list.”</p>
+        </div>
+        <div class="card rewrite"><h3>Rewrite</h3>
+          <p class="no">✕ “Green means go: 100% gluten-free!”</p>
+          <p class="yes">✓ “Safe for your list: none of your 15 ingredients were found in the ingredient list on record.”</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Motifs -->
+  <section aria-labelledby="motifs">
+    <div class="container">
+      <p class="kicker">07 · Graphic elements</p>
+      <h2 id="motifs">Graphic elements</h2>
+      <div class="grid g4" style="margin-top:1.5rem">
+        <figure><div class="motif m-brackets" aria-hidden="true"><span></span></div><figcaption><b>Scan brackets</b><br><span class="small">Frame key product moments and screenshots.</span></figcaption></figure>
+        <figure><div class="motif m-arcs" aria-hidden="true"></div><figcaption><b>Circles &amp; arcs</b><br><span class="small">A cream circle with a green arc behind hero objects.</span></figcaption></figure>
+        <figure><div class="motif m-sticker" aria-hidden="true">
+          <svg viewBox="0 0 120 120"><defs><path id="sp2" d="M60 60m-43 0a43 43 0 1 1 86 0a43 43 0 1 1-86 0"/></defs><circle cx="60" cy="60" r="60" fill="#E2EE6E"/><text style="font-family:Archivo,sans-serif;font-weight:900;font-stretch:72%;font-size:11.5px;letter-spacing:.06em" fill="#245A49"><textPath href="#sp2" textLength="268" lengthAdjust="spacing">INGREDIENTS FIRST • INGREDIENTS FIRST •</textPath></text><g transform="translate(38 38) scale(.22)"><path mask="url(#anat)" fill="#245A49" d="M44 40h7v120h-7z M54 40h3v120h-3z M60 40h8v120h-8z M71 40h3v120h-3z M77 40h5v120h-5z M85 40h9v120h-9z M97 40h3v120h-3z M103 40h6v120h-6z M112 40h3v120h-3z M118 40h8v120h-8z M129 40h4v120h-4z M136 40h6v120h-6z M145 40h3v120h-3z M151 40h8v120h-8z"/></g></svg>
+        </div><figcaption><b>Lime sticker</b><br><span class="small">One per layout, max. Our “Ingredients first” stamp.</span></figcaption></figure>
+        <figure><div class="motif m-dots" aria-hidden="true"></div><figcaption><b>Dot grid</b><br><span class="small">Subtle texture on orange, fading out across the panel.</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Files -->
+  <section aria-labelledby="files" class="files">
+    <div class="container">
+      <p class="kicker">08 · Files</p>
+      <h2 id="files">Asset files</h2>
+      <ul style="margin-top:1.25rem">
+        <li><a href="logo/mysafeeats-logo.svg"><code>logo/mysafeeats-logo.svg</code></a><span class="small">Primary lockup for light backgrounds (also <code>@2x.png</code>)</span></li>
+        <li><a href="logo/mysafeeats-logo-reverse.svg"><code>logo/mysafeeats-logo-reverse.svg</code></a><span class="small">For green and dark backgrounds (also <code>@2x.png</code>)</span></li>
+        <li><a href="logo/mysafeeats-logo-on-orange.svg"><code>logo/mysafeeats-logo-on-orange.svg</code></a><span class="small">For orange backgrounds</span></li>
+        <li><a href="logo/mysafeeats-logo-mono-ink.svg"><code>logo/mysafeeats-logo-mono-ink.svg</code></a> · <a href="logo/mysafeeats-logo-mono-cream.svg"><code>mono-cream.svg</code></a><span class="small">One-color versions</span></li>
+        <li><a href="logo/mysafeeats-logo-stacked.svg"><code>logo/mysafeeats-logo-stacked.svg</code></a><span class="small">Stacked lockup for square spaces</span></li>
+        <li><a href="logo/mysafeeats-mark.svg"><code>logo/mysafeeats-mark.svg</code></a> · <a href="logo/mysafeeats-mark-lime.svg"><code>mark-lime.svg</code></a><span class="small">The mark alone, green or lime circle</span></li>
+        <li><a href="logo/mysafeeats-app-icon.svg"><code>logo/mysafeeats-app-icon.svg</code></a> · <a href="logo/mysafeeats-app-icon-dark.svg"><code>-dark</code></a> · <a href="logo/mysafeeats-app-icon-tinted.svg"><code>-tinted</code></a><span class="small">iOS app icon appearances</span></li>
+        <li><a href="logo/mysafeeats-app-icon-1024.png"><code>logo/mysafeeats-app-icon-1024.png</code></a><span class="small">Full-bleed app icon (stores apply their own corner mask)</span></li>
+        <li><a href="favicon.svg"><code>favicon.svg</code></a> · <a href="apple-touch-icon.png"><code>apple-touch-icon.png</code></a><span class="small">Browser and iOS home-screen icons</span></li>
+        <li><a href="og-image.png"><code>og-image.png</code></a><span class="small">1200×630 social share image</span></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container small">MySafeEats brand guide. Archivo is licensed under the SIL Open Font License 1.1.</div>
+</footer>
+</body>
+</html>
