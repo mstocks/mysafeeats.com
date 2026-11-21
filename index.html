@@ -10,17 +10,15 @@
     [your-domain.com]     Production domain (canonical, Open Graph, JSON-LD)
     [Company Name]        Legal entity name for the footer copyright
     hello@[your-domain.com]  Contact / support email
-    #app-store-url        Apple App Store listing URL (and official badge)
-    #google-play-url      Google Play listing URL (and official badge)
+    #web-app-url          The web app's address (every "Open MySafeEats" button)
     #privacy-policy-url   Privacy policy page
     #terms-url            Terms of use page
-    "operatingSystem"     Confirm platforms in the JSON-LD block below
   Supporting files expected next to this page: favicon.svg,
   apple-touch-icon.png, og-image.png (all included in this folder).
   =====================================================================
 -->
 <title>MySafeEats — The gluten scanner that reads ingredients first</title>
-<meta name="description" content="Scan a barcode and MySafeEats checks every ingredient for gluten, not the front-of-package claims. Built for celiac disease, customizable for any allergen.">
+<meta name="description" content="Scan a barcode right in your phone’s browser and MySafeEats checks every ingredient for gluten, not the front-of-package claims. No download needed.">
 <link rel="canonical" href="https://[your-domain.com]/">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#E65E2C">
@@ -53,12 +51,13 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "MobileApplication",
+  "@type": "WebApplication",
   "name": "MySafeEats",
   "url": "https://[your-domain.com]/",
-  "description": "MySafeEats helps people with celiac disease find gluten-free foods. Scan a UPC barcode and the app checks every ingredient against a list of gluten-containing ingredients, plus any allergens you add.",
+  "description": "MySafeEats is a web app that helps people with celiac disease find gluten-free foods. Scan a UPC barcode in your phone's browser and it checks every ingredient against a list of gluten-containing ingredients, plus any allergens you add. No download needed.",
   "applicationCategory": "HealthApplication",
-  "operatingSystem": "iOS, Android"
+  "operatingSystem": "Any (runs in a web browser)",
+  "browserRequirements": "Requires JavaScript and camera access"
 }
 </script>
 
@@ -86,6 +85,8 @@
   /* Status (never use orange for status; it's the brand) */
   --flag:#B42318;
   --flag-bg:#FCE8E6;
+  --verify:#8A5300;        /* "verify before you eat" (dextrin, food starch) */
+  --verify-bg:#FFF0C2;
   --ok:#245A49;
   --ok-bg:#E1ECE4;
   /* Lines & fields */
@@ -218,6 +219,7 @@ p,li{text-wrap:pretty}
 .mark .icon{width:62%;height:62%;stroke-width:3}
 .mark--ok{background:var(--ok-bg);color:var(--ok)}
 .mark--flag{background:var(--flag);color:#fff}
+.mark--verify{background:var(--verify);color:#fff}
 
 /* Hero visual: phone + annotations */
 .hero-visual{position:relative;display:flex;justify-content:center;padding-block:1rem}
@@ -433,6 +435,7 @@ p,li{text-wrap:pretty}
 .chip[aria-pressed="true"] .chip-ind .icon{opacity:1}
 .chip--custom[aria-pressed="true"]{background:var(--orange);border-color:var(--orange);color:var(--ink)}
 .chip--custom[aria-pressed="true"] .chip-ind{background:var(--ink);border-color:var(--ink);color:var(--orange)}
+.chip-badge{margin-left:.1rem;padding:.14rem .45rem;border-radius:999px;background:var(--verify-bg);color:var(--verify);font-size:.7rem;font-weight:800;letter-spacing:.02em}
 .chip-wrap{display:inline-flex;align-items:center;gap:.15rem}
 .chip-remove{display:grid;place-items:center;width:2.25rem;height:2.25rem;border-radius:50%;border:0;background:transparent;color:var(--ink-2);cursor:pointer}
 .chip-remove:hover{background:rgba(22,32,26,.08);color:var(--ink)}
@@ -450,6 +453,15 @@ p,li{text-wrap:pretty}
 .quick-btn:hover{border-style:solid;border-color:var(--orange-ink);color:var(--orange-ink);background:var(--orange-tint)}
 html:not(.js) .js-only{display:none}
 .demo-result{background:var(--cream);border:1px solid var(--line);border-radius:22px;padding:1.1rem}
+.product-switch{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.3rem;padding:.3rem;margin-bottom:1rem;border-radius:16px;background:var(--cream-2)}
+.seg{min-width:0;min-height:2.75rem;padding:.35rem .25rem;border:0;border-radius:12px;background:transparent;color:var(--ink-2);font-weight:650;font-size:.86rem;white-space:nowrap;cursor:pointer;transition:background-color .2s,color .2s}
+.seg:hover{color:var(--ink);background:rgba(18,38,30,.06)}
+.seg[aria-pressed="true"]{background:var(--ink);color:var(--on-green)}
+.thumb--turkey{background:linear-gradient(160deg,#D9967A,#A9563F)}
+.thumb--turkey::before{background:#FFF7EA}
+.thumb--rice{background:#EAD9B2}
+.thumb--rice::before{left:20%;right:20%;top:20%;height:60%;border-radius:50%;background:#F7EEDB}
+.thumb--rice::after{display:none}
 .demo-product{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem}
 .demo-product .thumb{width:3rem;height:3rem;border-radius:12px}
 .demo-product strong{display:block;font-size:1.02rem;line-height:1.25}
@@ -461,10 +473,13 @@ html:not(.js) .js-only{display:none}
 .demo-verdict.is-flag{background:var(--flag-bg);color:var(--flag)}
 .demo-verdict.is-clear{background:var(--ok-bg);color:var(--ok)}
 .demo-verdict.is-empty{background:var(--cream-2);color:var(--ink-2)}
+.demo-verdict.is-verify{background:var(--verify-bg);color:var(--verify)}
 .demo-list li{display:flex;align-items:center;gap:.65rem;padding:.55rem .1rem;border-top:1px solid var(--line);font-size:.97rem}
 .demo-list li:first-child{border-top:0}
 .demo-list .mark{width:1.45rem;height:1.45rem}
 .demo-list li.is-flag{color:var(--flag);font-weight:700}
+.demo-list li.is-verify{color:var(--verify);font-weight:700}
+.demo-list .hits.hits--verify{background:var(--verify)}
 .demo-list .hits{margin-left:auto;font-size:.74rem;font-weight:700;color:#fff;background:var(--flag);padding:.2rem .55rem;border-radius:999px;white-space:nowrap}
 .demo-note{display:flex;gap:.55rem;margin-top:1.25rem;font-size:.86rem;color:var(--ink-3)}
 .demo-note .icon{margin-top:.1rem}
@@ -495,7 +510,21 @@ html:not(.js) .js-only{display:none}
 .faq-answer{padding:0 3.5rem 1.6rem .25rem;color:var(--ink-2);max-width:44em}
 .faq-answer p+p{margin-top:.75rem}
 
-/* ===================== Download CTA ===================== */
+/* ===================== Gluten list ===================== */
+.gl-grid{display:grid;gap:clamp(2rem, 4vw, 3.5rem);align-items:start}
+@media (min-width:980px){.gl-grid{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr)}.gl-grid .section-head{margin-bottom:0}}
+.gl-list{display:grid;gap:.6rem;grid-template-columns:repeat(auto-fill,minmax(min(100%,14.5rem),1fr))}
+.gl-list li{display:flex;align-items:center;gap:.75rem;min-height:3.6rem;padding:.6rem 1rem;border-radius:16px;background:var(--paper);border:1px solid var(--line);font-weight:700;font-size:1.04rem;line-height:1.25}
+.gl-num{flex:none;min-width:1.6rem;font-family:var(--font-display);font-weight:900;font-stretch:72%;font-size:1.2rem;color:var(--orange-ink)}
+.gl-sub{display:block;font-size:.8rem;font-weight:500;color:var(--ink-3)}
+.gl-list li.is-verify{background:var(--verify-bg);border-color:rgba(138,83,0,.28)}
+.gl-list li.is-verify .gl-num,.gl-list li.is-verify .gl-sub{color:var(--verify)}
+.gl-tag{flex:none;margin-left:auto;padding:.2rem .6rem;border-radius:999px;background:var(--verify);color:#fff;font-size:.74rem;font-weight:800}
+.gl-note{display:flex;gap:.65rem;margin-top:1rem;padding:1rem 1.15rem;border-radius:16px;background:var(--paper);border:1px solid var(--line);font-size:.95rem;color:var(--ink-2)}
+.gl-note .icon{color:var(--verify);margin-top:.15rem}
+.gl-note strong{color:var(--ink)}
+
+/* ===================== Get started (web app) ===================== */
 .cta{padding-bottom:clamp(4.5rem, 3rem + 6vw, 7.5rem)}
 .cta-panel{background:var(--orange);color:var(--ink);border-radius:var(--panel-radius);padding:clamp(2.25rem, 6vw, 4.75rem);display:grid;gap:2.75rem;align-items:center;position:relative;overflow:hidden;isolation:isolate}
 @media (min-width:920px){.cta-panel{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)}}
@@ -504,12 +533,13 @@ html:not(.js) .js-only{display:none}
 .cta-panel h2{margin-bottom:1.1rem}
 .cta-panel h2 em{font-style:normal;color:var(--ink);background:var(--lime);padding:0 .12em;border-radius:.14em;box-decoration-break:clone;-webkit-box-decoration-break:clone}
 .cta-panel .lead{color:var(--ink);margin-bottom:2rem}
-.store-buttons{display:flex;flex-wrap:wrap;gap:.75rem}
-.store-btn{display:inline-flex;align-items:center;gap:.75rem;min-height:3.6rem;padding:.6rem 1.35rem .6rem 1.05rem;border-radius:16px;background:var(--ink);color:var(--cream);text-decoration:none;transition:transform .2s var(--ease),background-color .2s}
-.store-btn:hover{transform:translateY(-2px);background:#000}
-.store-btn .icon{width:1.6rem;height:1.6rem;color:var(--lime)}
-.store-btn small{display:block;font-size:.72rem;font-weight:500;line-height:1.1;opacity:.9}
-.store-btn strong{display:block;font-size:1.08rem;line-height:1.2}
+.cta-panel .eyebrow{background:var(--lime);color:var(--ink)}
+.start-steps{display:grid;gap:.75rem;margin:0 0 2rem}
+.start-steps li{display:flex;align-items:flex-start;gap:.8rem;font-size:1.04rem;line-height:1.45}
+.start-num{flex:none;display:grid;place-items:center;width:1.9rem;height:1.9rem;border-radius:50%;background:var(--ink);color:var(--lime);font-family:var(--font-display);font-weight:900;font-size:1rem}
+.btn-dark{background:var(--ink);color:var(--on-green);box-shadow:0 14px 26px -14px rgba(0,0,0,.6)}
+.btn-dark:hover{background:#000}
+.btn-dark .icon{color:var(--lime)}
 .cta-fine{margin-top:1.4rem;font-size:.9rem;font-weight:500}
 .cta-fine a{color:var(--ink);font-weight:650}
 .cta-fine a:hover{color:var(--ink);text-decoration-thickness:3px}
@@ -519,6 +549,7 @@ html:not(.js) .js-only{display:none}
 .list-card-chips{display:flex;flex-wrap:wrap;gap:.45rem}
 .list-card-chips span{padding:.42rem .8rem;border-radius:999px;font-weight:650;font-size:.88rem;background:var(--green);color:var(--cream)}
 .list-card-chips .is-custom{background:var(--orange);color:var(--ink)}
+.list-card-chips .is-verify{background:var(--verify-bg);color:var(--verify)}
 .list-card-chips .is-add{background:transparent;color:var(--ink-2);border:2px dashed var(--field)}
 .list-card .pill--lime{position:absolute;top:-.8rem;right:1.2rem;transform:rotate(5deg);font-size:.8rem;padding:.35rem .8rem}
 
@@ -546,7 +577,7 @@ html:not(.js) .js-only{display:none}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important}
   .js [data-reveal]{opacity:1;transform:none}
-  .btn:hover,.store-btn:hover{transform:none}
+  .btn:hover{transform:none}
 }
 @media (forced-colors:active){
   .nav-toggle-bars,.nav-toggle-bars::before,.nav-toggle-bars::after{background:CanvasText}
@@ -565,6 +596,8 @@ html:not(.js) .js-only{display:none}
     <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
     <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/></symbol>
     <symbol id="i-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="m8 12.5 2.7 2.7L16 9.8"/></symbol>
+    <symbol id="i-x-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="m15 9-6 6M9 9l6 6"/></symbol>
+    <symbol id="i-excl" viewBox="0 0 24 24"><path d="M12 6v8M12 18h.01"/></symbol>
     <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5.5M12 7.5h.01"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
     <symbol id="i-scan" viewBox="0 0 24 24"><path d="M3 7.5V5a2 2 0 0 1 2-2h2.5M16.5 3H19a2 2 0 0 1 2 2v2.5M21 16.5V19a2 2 0 0 1-2 2h-2.5M7.5 21H5a2 2 0 0 1-2-2v-2.5"/><path d="M7.5 8v8M10.5 8v8M13.5 8v8M16.5 8v8"/></symbol>
@@ -600,7 +633,7 @@ html:not(.js) .js-only{display:none}
         <li><a href="#custom-allergens">Your allergens</a></li>
         <li><a href="#faq">FAQ</a></li>
       </ul>
-      <a class="btn btn-primary btn-sm" href="#download">Get the app</a>
+      <a class="btn btn-primary btn-sm" href="#web-app-url">Open the app</a>
     </nav>
   </div>
 </header>
@@ -616,13 +649,14 @@ html:not(.js) .js-only{display:none}
           <h1 id="hero-title">Read the <span class="nowrap"><em class="hl">ingredients</em>,</span> not the marketing.</h1>
           <p class="lead">MySafeEats scans a product’s barcode, pulls its full ingredient list, and checks every ingredient against a list of gluten-containing ingredients. Your answer is based on what’s actually in the food, not on what the front of the package claims.</p>
           <div class="hero-actions">
-            <a class="btn btn-green btn-lg" href="#download">Get MySafeEats <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <a class="btn btn-green btn-lg" href="#web-app-url">Open MySafeEats <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
             <a class="btn btn-ghost btn-lg" href="#how-it-works">See how it works</a>
           </div>
           <ul class="hero-points" role="list">
             <li><span class="mark" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Scans UPC barcodes</li>
             <li><span class="mark" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Checks every listed ingredient</li>
             <li><span class="mark" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Add your own allergens</li>
+            <li><span class="mark" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>No download needed</li>
           </ul>
         </div>
 
@@ -826,7 +860,7 @@ html:not(.js) .js-only{display:none}
           </svg>
           <span class="step-num">Step 3</span>
           <h3>Each ingredient is checked</h3>
-          <p>Every ingredient is compared against a list of identified gluten-containing ingredients, plus any allergens you’ve added.</p>
+          <p>Every ingredient is compared against the <a href="#gluten-list">built-in gluten list</a>, plus any allergens you’ve added.</p>
         </li>
         <li class="step" data-reveal style="--d:.24s">
           <svg class="step-art" viewBox="0 0 200 120" aria-hidden="true" focusable="false">
@@ -843,6 +877,31 @@ html:not(.js) .js-only{display:none}
           <p>See at a glance whether anything on your list turned up, and which ingredient was flagged.</p>
         </li>
       </ol>
+    </div>
+  </section>
+
+  <!-- ============ Gluten list ============ -->
+  <section id="gluten-list" class="section" aria-labelledby="list-title" style="padding-top:0">
+    <div class="container gl-grid">
+      <div class="section-head" data-reveal>
+        <p class="eyebrow">The built-in gluten list</p>
+        <h2 id="list-title">Nine ingredients we <em>watch for</em>.</h2>
+        <p class="lead">These are the ingredients people with celiac disease need to watch out for. Every scan checks each listed ingredient against them from day one, and you can switch any off or add your own.</p>
+      </div>
+      <div data-reveal style="--d:.08s">
+        <ul class="gl-list" role="list" aria-label="Built-in gluten list">
+          <li><span class="gl-num" aria-hidden="true">01</span><span>Wheat</span></li>
+          <li><span class="gl-num" aria-hidden="true">02</span><span>Rye</span></li>
+          <li><span class="gl-num" aria-hidden="true">03</span><span>Triticale</span></li>
+          <li><span class="gl-num" aria-hidden="true">04</span><span>Barley</span></li>
+          <li><span class="gl-num" aria-hidden="true">05</span><span>Malt</span></li>
+          <li><span class="gl-num" aria-hidden="true">06</span><span>Regular oats<span class="gl-sub">Not labeled gluten-free</span></span></li>
+          <li class="is-verify"><span class="gl-num" aria-hidden="true">07</span><span>Dextrin / Food starch<span class="gl-sub">Especially in meats</span></span><span class="gl-tag">Verify</span></li>
+          <li><span class="gl-num" aria-hidden="true">08</span><span>Brewer’s yeast</span></li>
+          <li><span class="gl-num" aria-hidden="true">09</span><span>Yeast extract</span></li>
+        </ul>
+        <p class="gl-note"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg><span><strong>Dextrin and food starch are flagged for you to verify, not marked unsafe.</strong> They can be made from wheat, and labels on meat products don’t always name the source, so check the package or ask the manufacturer.</span></p>
+      </div>
     </div>
   </section>
 
@@ -886,19 +945,21 @@ html:not(.js) .js-only{display:none}
             <div class="demo-head">
               <span class="pill pill--lime">Interactive demo</span>
               <h3 id="demo-title">Try it with a sample product</h3>
-              <p class="js-only">Add an ingredient, or tap one to switch it off, and watch the result update.</p>
+              <p class="js-only">Pick a sample product, switch ingredients on or off, or add your own, and watch the result update.</p>
             </div>
             <div class="demo-body">
               <div class="demo-controls">
-                <h4 class="demo-label" id="gluten-label">Gluten list <span>(a few examples)</span></h4>
+                <h4 class="demo-label" id="gluten-label">Gluten list</h4>
                 <div class="chips" role="group" aria-labelledby="gluten-label" data-chips="gluten">
                   <button type="button" class="chip" aria-pressed="true" data-term="Wheat"><span class="chip-ind" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Wheat</button>
-                  <button type="button" class="chip" aria-pressed="true" data-term="Barley"><span class="chip-ind" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Barley</button>
                   <button type="button" class="chip" aria-pressed="true" data-term="Rye"><span class="chip-ind" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Rye</button>
-                  <button type="button" class="chip" aria-pressed="true" data-term="Malt"><span class="chip-ind" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Malt</button>
-                  <button type="button" class="chip" aria-pressed="true" data-term="Spelt"><span class="chip-ind" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Spelt</button>
                   <button type="button" class="chip" aria-pressed="true" data-term="Triticale"><span class="chip-ind" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Triticale</button>
+                  <button type="button" class="chip" aria-pressed="true" data-term="Barley"><span class="chip-ind" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Barley</button>
+                  <button type="button" class="chip" aria-pressed="true" data-term="Malt"><span class="chip-ind" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Malt</button>
+                  <button type="button" class="chip" aria-pressed="true" data-term="Regular oats"><span class="chip-ind" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Regular oats</button>
+                  <button type="button" class="chip" aria-pressed="true" data-term="Dextrin / Food starch"><span class="chip-ind" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Dextrin / Food starch<span class="chip-badge">Verify</span></button>
                   <button type="button" class="chip" aria-pressed="true" data-term="Brewer’s yeast"><span class="chip-ind" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Brewer’s yeast</button>
+                  <button type="button" class="chip" aria-pressed="true" data-term="Yeast extract"><span class="chip-ind" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Yeast extract</button>
                 </div>
 
                 <div class="js-only">
@@ -929,19 +990,24 @@ html:not(.js) .js-only{display:none}
               </div>
 
               <div class="demo-result">
+                <div class="product-switch js-only" role="group" aria-label="Sample product">
+                  <button type="button" class="seg" aria-pressed="true" data-product="cereal">Cereal</button>
+                  <button type="button" class="seg" aria-pressed="false" data-product="turkey">Turkey</button>
+                  <button type="button" class="seg" aria-pressed="false" data-product="rice">Rice cake</button>
+                </div>
                 <div class="demo-product">
-                  <div class="thumb" aria-hidden="true"></div>
-                  <div><strong>Cocoa Rice Crisps</strong><span>Sample product · front label says “wheat free”</span></div>
+                  <div class="thumb" aria-hidden="true" data-p-thumb></div>
+                  <div><strong data-p-name>Cocoa Rice Crisps</strong><span data-p-meta>Sample product · front label says “wheat free”</span></div>
                 </div>
                 <div class="demo-verdict is-flag" data-verdict role="status" aria-atomic="true">
-                  <svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>
+                  <svg class="icon" aria-hidden="true"><use href="#i-x-circle"/></svg>
                   <div><strong data-v-title>Not safe for your list</strong><span class="sr-only">. </span><span class="v-sub" data-v-sub>Contains gluten. 1 of 8 ingredients matched your list: barley malt extract.</span></div>
                 </div>
                 <ul class="demo-list" role="list" aria-label="Ingredients in the sample product" data-list>
                   <li><span class="mark mark--ok" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Whole grain rice</li>
                   <li><span class="mark mark--ok" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Cane sugar</li>
                   <li><span class="mark mark--ok" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Cocoa powder</li>
-                  <li class="is-flag"><span class="mark mark--flag" aria-hidden="true"><svg class="icon"><use href="#i-x"/></svg></span><span class="sr-only">Flagged: </span>Barley malt extract<span class="hits">Barley, Malt</span></li>
+                  <li class="is-flag"><span class="mark mark--flag" aria-hidden="true"><svg class="icon"><use href="#i-x"/></svg></span><span class="sr-only">Matches your list: </span>Barley malt extract<span class="hits">Barley, Malt</span></li>
                   <li><span class="mark mark--ok" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Sunflower oil</li>
                   <li><span class="mark mark--ok" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Sea salt</li>
                   <li><span class="mark mark--ok" aria-hidden="true"><svg class="icon"><use href="#i-check"/></svg></span>Soy lecithin</li>
@@ -999,6 +1065,10 @@ html:not(.js) .js-only{display:none}
       </div>
       <div class="faq-list" data-reveal style="--d:.08s">
         <details class="faq-item">
+          <summary>Do I need to download an app?</summary>
+          <div class="faq-answer"><p>No. MySafeEats is a web app that runs in your phone’s browser, on iPhone or Android. Open it, allow camera access when your browser asks so it can read barcodes, and start scanning. If you like, add it to your home screen for one-tap access.</p></div>
+        </details>
+        <details class="faq-item">
           <summary>Does MySafeEats replace reading the label?</summary>
           <div class="faq-answer"><p>No. MySafeEats is a shopping aid that helps you screen products quickly. Ingredient data can be incomplete or out of date, and recipes change, so always check the package before you eat something.</p></div>
         </details>
@@ -1008,7 +1078,7 @@ html:not(.js) .js-only{display:none}
         </details>
         <details class="faq-item">
           <summary>Which ingredients does it look for?</summary>
-          <div class="faq-answer"><p>By default, MySafeEats checks for ingredients identified as containing gluten, such as wheat, barley, rye, and malt. You can customize the list and add any other ingredients you want to avoid.</p></div>
+          <div class="faq-answer"><p>By default, MySafeEats checks for wheat, rye, triticale, barley, malt, regular oats (oats not labeled gluten-free), brewer’s yeast, and yeast extract. Dextrin and food starch are flagged for you to verify, especially in meats, because they can be made from wheat. You can switch any item off and add other ingredients you want to avoid.</p></div>
         </details>
         <details class="faq-item">
           <summary>Can I use it for allergens other than gluten?</summary>
@@ -1030,24 +1100,21 @@ html:not(.js) .js-only{display:none}
     </div>
   </section>
 
-  <!-- ============ Download ============ -->
-  <section id="download" class="cta" aria-labelledby="download-title">
+  <!-- ============ Get started ============ -->
+  <section id="get-started" class="cta" aria-labelledby="start-title">
     <div class="container">
       <div class="cta-panel">
         <div data-reveal>
-          <h2 id="download-title">Make your next grocery run <em>easier</em>.</h2>
-          <p class="lead">Download MySafeEats, set up your list, and start scanning. Ingredients first, every time.</p>
-          <!-- REPLACE: swap these for the official App Store / Google Play badges (required by Apple's and Google's brand guidelines) and set the real listing URLs. -->
-          <div class="store-buttons">
-            <a class="store-btn" href="#app-store-url">
-              <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
-              <span><small>Download for</small><strong>iPhone</strong></span>
-            </a>
-            <a class="store-btn" href="#google-play-url">
-              <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
-              <span><small>Download for</small><strong>Android</strong></span>
-            </a>
-          </div>
+          <p class="eyebrow">No download needed</p>
+          <h2 id="start-title">Open it in your browser. Start <em>scanning</em>.</h2>
+          <p class="lead">MySafeEats is a web app, so it runs right in your phone’s browser on iPhone or Android. No app store, nothing to install.</p>
+          <ol class="start-steps" role="list">
+            <li><span class="start-num" aria-hidden="true">1</span><span><strong>Open MySafeEats</strong> in your phone’s browser.</span></li>
+            <li><span class="start-num" aria-hidden="true">2</span><span><strong>Allow camera access</strong> when your browser asks, so it can read barcodes.</span></li>
+            <li><span class="start-num" aria-hidden="true">3</span><span><strong>Add it to your home screen</strong> for one-tap access. Optional.</span></li>
+          </ol>
+          <!-- REPLACE: point #web-app-url at the web app's address. -->
+          <a class="btn btn-dark btn-lg" href="#web-app-url">Open MySafeEats <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
           <p class="cta-fine">A shopping aid, not a substitute for reading labels. <a href="#disclaimer">Read the important information</a>.</p>
         </div>
         <div aria-hidden="true" data-reveal style="--d:.12s">
@@ -1055,8 +1122,8 @@ html:not(.js) .js-only{display:none}
             <span class="pill pill--lime">Your list</span>
             <p class="list-card-title"><span class="tile tile--green"><svg class="icon"><use href="#i-sliders"/></svg></span>What I avoid</p>
             <div class="list-card-chips">
-              <span>Wheat</span><span>Barley</span><span>Rye</span><span>Malt</span><span>Spelt</span>
-              <span class="is-custom">Sesame</span><span class="is-custom">Mustard</span><span class="is-add">+ Add</span>
+              <span>Wheat</span><span>Rye</span><span>Barley</span><span>Malt</span><span>Regular oats</span><span>Yeast extract</span>
+              <span class="is-verify">Food starch · verify</span><span class="is-custom">Sesame</span><span class="is-add">+ Add</span>
             </div>
           </div>
         </div>
@@ -1160,13 +1227,37 @@ html:not(.js) .js-only{display:none}
   const demo = document.querySelector('[data-demo]');
   if (!demo) return;
 
-  const INGREDIENTS = ['Whole grain rice', 'Cane sugar', 'Cocoa powder', 'Barley malt extract',
-    'Sunflower oil', 'Sea salt', 'Soy lecithin', 'Natural vanilla flavor'];
+  const PRODUCTS = {
+    cereal: { name: 'Cocoa Rice Crisps', meta: 'Sample product · front label says “wheat free”', thumb: 'thumb',
+      ingredients: ['Whole grain rice', 'Cane sugar', 'Cocoa powder', 'Barley malt extract', 'Sunflower oil', 'Sea salt', 'Soy lecithin', 'Natural vanilla flavor'] },
+    turkey: { name: 'Smoked Turkey Slices', meta: 'Sample product · front label says “100% natural”', thumb: 'thumb thumb--turkey',
+      ingredients: ['Turkey breast', 'Water', 'Sea salt', 'Modified food starch', 'Cane sugar', 'Sodium phosphate', 'Natural flavor'] },
+    rice: { name: 'Plain Rice Cakes', meta: 'Sample product · front label says “lightly salted”', thumb: 'thumb thumb--rice',
+      ingredients: ['Whole grain brown rice', 'Sunflower oil', 'Sea salt'] }
+  };
+  /* How each built-in item is matched. "verify" items get a closer look; they are never marked unsafe on their own. */
+  const RULES = {
+    'wheat': { words: ['wheat'] },
+    'rye': { words: ['rye'] },
+    'triticale': { words: ['triticale'] },
+    'barley': { words: ['barley'] },
+    'malt': { words: ['malt', 'malted'] },
+    'regular oats': { words: ['oat', 'oatmeal'], unless: /gluten[- ]free (?:whole grain |rolled )?oat/ },
+    'dextrin / food starch': { words: ['dextrin', 'food starch'], level: 'verify' },
+    "brewer's yeast": { words: ["brewer's yeast", 'brewers yeast'] },
+    'yeast extract': { words: ['yeast extract'] }
+  };
   const SVGNS = 'http://www.w3.org/2000/svg';
   const norm = (s) => s.toLowerCase().replace(/[‘’]/g, "'").replace(/\s+/g, ' ').trim();
   const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   /* Whole-word match with optional plural, so "malt" matches "barley malt extract" but not "maltodextrin" */
-  const pattern = (t) => new RegExp('(?:^|[^\\p{L}\\p{N}])' + esc(norm(t)) + '(?:e?s)?(?=$|[^\\p{L}\\p{N}])', 'u');
+  const wordRe = (w) => new RegExp('(?:^|[^\\p{L}\\p{N}])' + esc(norm(w)) + '(?:e?s)?(?=$|[^\\p{L}\\p{N}])', 'u');
+  const makeTest = (name) => {
+    const rule = RULES[norm(name)];
+    const res = (rule ? rule.words : [name]).map(wordRe);
+    return (text) => res.some((re) => re.test(text)) && !(rule && rule.unless && rule.unless.test(text));
+  };
+  const levelOf = (name) => (RULES[norm(name)] && RULES[norm(name)].level) || 'flag';
   const icon = (id) => {
     const svg = document.createElementNS(SVGNS, 'svg');
     svg.setAttribute('class', 'icon');
@@ -1184,70 +1275,100 @@ html:not(.js) .js-only{display:none}
   const vIcon = verdict.querySelector('use');
   const vTitle = verdict.querySelector('[data-v-title]');
   const vSub = verdict.querySelector('[data-v-sub]');
+  const pName = demo.querySelector('[data-p-name]');
+  const pMeta = demo.querySelector('[data-p-meta]');
+  const pThumb = demo.querySelector('[data-p-thumb]');
+  const segs = [...demo.querySelectorAll('[data-product]')];
   const form = demo.querySelector('[data-add-form]');
   const input = form.querySelector('input');
   const msg = demo.querySelector('#add-msg');
   const quickBtns = [...demo.querySelectorAll('[data-quick] button')];
+  let product = 'cereal';
 
   const terms = [...demo.querySelectorAll('[data-chips="gluten"] .chip')].map((btn) => ({
-    name: btn.dataset.term, on: btn.getAttribute('aria-pressed') === 'true', custom: false, re: pattern(btn.dataset.term), btn
+    name: btn.dataset.term, on: btn.getAttribute('aria-pressed') === 'true', custom: false,
+    level: levelOf(btn.dataset.term), test: makeTest(btn.dataset.term), btn
   }));
 
   const say = (text, isError = false) => { msg.textContent = text; msg.classList.toggle('is-error', isError); };
   const setText = (el, text) => { if (el.textContent !== text) el.textContent = text; };
   const syncQuick = () => quickBtns.forEach((b) => { b.hidden = terms.some((t) => norm(t.name) === norm(b.dataset.term)); });
+  const lower = (rows) => rows.map((r) => r.name.toLowerCase()).join(', ');
 
   function render() {
+    const ingredients = PRODUCTS[product].ingredients;
     const active = terms.filter((t) => t.on);
-    const rows = INGREDIENTS.map((name) => ({ name, hits: active.filter((t) => t.re.test(norm(name))) }));
+    const rows = ingredients.map((name) => {
+      const hits = active.filter((t) => t.test(norm(name)));
+      const level = hits.some((h) => h.level === 'flag') ? 'flag' : (hits.length ? 'verify' : 'ok');
+      return { name, hits, level };
+    });
 
     list.replaceChildren(...rows.map((r) => {
       const li = document.createElement('li');
-      const flagged = r.hits.length > 0;
       const mark = document.createElement('span');
-      mark.className = 'mark ' + (flagged ? 'mark--flag' : 'mark--ok');
+      mark.className = 'mark mark--' + r.level;
       mark.setAttribute('aria-hidden', 'true');
-      mark.appendChild(icon(flagged ? 'i-x' : 'i-check'));
+      mark.appendChild(icon(r.level === 'flag' ? 'i-x' : (r.level === 'verify' ? 'i-excl' : 'i-check')));
       li.appendChild(mark);
-      if (flagged) {
-        li.className = 'is-flag';
+      if (r.level !== 'ok') {
+        li.className = 'is-' + r.level;
         const sr = document.createElement('span');
         sr.className = 'sr-only';
-        sr.textContent = 'Flagged: ';
+        sr.textContent = r.level === 'flag' ? 'Matches your list: ' : 'Verify: ';
         li.appendChild(sr);
       }
       li.appendChild(document.createTextNode(r.name));
-      if (flagged) {
+      if (r.level !== 'ok') {
         const tag = document.createElement('span');
-        tag.className = 'hits';
-        tag.textContent = r.hits.map((h) => h.name).join(', ');
+        tag.className = r.level === 'flag' ? 'hits' : 'hits hits--verify';
+        tag.textContent = r.level === 'flag'
+          ? r.hits.filter((h) => h.level === 'flag').map((h) => h.name).join(', ')
+          : 'Verify source';
         li.appendChild(tag);
       }
       return li;
     }));
 
-    const flagged = rows.filter((r) => r.hits.length);
-    const n = INGREDIENTS.length;
+    const flagged = rows.filter((r) => r.level === 'flag');
+    const toVerify = rows.filter((r) => r.level === 'verify');
+    const n = ingredients.length;
     let state, title, sub, iconId;
     if (!active.length) {
       state = 'is-empty'; iconId = 'i-info';
       title = 'Your list is empty';
       sub = 'Switch on at least one ingredient to check this product.';
-    } else if (!flagged.length) {
+    } else if (flagged.length) {
+      state = 'is-flag'; iconId = 'i-x-circle';
+      const gluten = flagged.some((r) => r.hits.some((h) => !h.custom && h.level === 'flag'));
+      title = 'Not safe for your list';
+      sub = `${gluten ? 'Contains gluten' : 'Contains an ingredient you avoid'}. ${flagged.length} of ${n} ingredients matched your list: ${lower(flagged)}.`
+        + (toVerify.length ? ` Also verify: ${lower(toVerify)}.` : '');
+    } else if (toVerify.length) {
+      state = 'is-verify'; iconId = 'i-alert';
+      title = 'Verify before you eat';
+      sub = `Check the source of ${lower(toVerify)}. Dextrin and food starch can be made from wheat, and labels on meat products don’t always say so.`;
+    } else {
       state = 'is-clear'; iconId = 'i-check-circle';
       title = 'Safe for your list';
       sub = `None of the ${n} ingredients matched your list. Always check the label.`;
-    } else {
-      state = 'is-flag'; iconId = 'i-alert';
-      const gluten = flagged.some((r) => r.hits.some((h) => !h.custom));
-      title = 'Not safe for your list';
-      sub = `${gluten ? 'Contains gluten' : 'Contains an ingredient you avoid'}. ${flagged.length} of ${n} ingredients matched your list: ${flagged.map((r) => r.name.toLowerCase()).join(', ')}.`;
     }
-    verdict.classList.remove('is-flag', 'is-clear', 'is-empty');
+    verdict.classList.remove('is-flag', 'is-clear', 'is-empty', 'is-verify');
     verdict.classList.add(state);
     vIcon.setAttribute('href', '#' + iconId);
     setText(vTitle, title);
     setText(vSub, sub);
+  }
+
+  function setProduct(key) {
+    product = key;
+    const p = PRODUCTS[key];
+    segs.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.product === key)));
+    pName.textContent = p.name;
+    pMeta.textContent = p.meta;
+    pThumb.className = p.thumb;
+    list.setAttribute('aria-label', `Ingredients in ${p.name}`);
+    render();
   }
 
   function addTerm(raw) {
@@ -1288,7 +1409,7 @@ html:not(.js) .js-only{display:none}
     wrap.append(btn, rm);
     customGroup.appendChild(wrap);
 
-    const term = { name: label, on: true, custom: true, re: pattern(label), btn, rm, wrap };
+    const term = { name: label, on: true, custom: true, level: 'flag', test: makeTest(label), btn, rm, wrap };
     terms.push(term);
     emptyMsg.hidden = true;
     syncQuick();
@@ -1309,6 +1430,8 @@ html:not(.js) .js-only{display:none}
   }
 
   demo.addEventListener('click', (e) => {
+    const seg = e.target.closest('[data-product]');
+    if (seg) { setProduct(seg.dataset.product); return; }
     const chip = e.target.closest('.chip');
     if (chip) {
       const t = terms.find((x) => x.btn === chip);
