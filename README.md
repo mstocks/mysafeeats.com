@@ -1,6 +1,6 @@
 # MySafeEats
 
-Marketing website and brand kit for **MySafeEats**, a mobile app that helps people with celiac disease find gluten-free foods. The app scans a product's UPC barcode, pulls its ingredient list, and checks every ingredient against a list of gluten-containing ingredients, plus any allergens the person adds. It reads the ingredients first, not the front-of-package claims.
+Marketing website and brand kit for **MySafeEats**, an HTML5 web app that helps people with celiac disease find gluten-free foods. It runs in any phone’s browser with nothing to install. It scans a product's UPC barcode, pulls its ingredient list, and checks every ingredient against a list of gluten-containing ingredients, plus any allergens the person adds. It reads the ingredients first, not the front-of-package claims.
 
 ## What's here
 
@@ -33,9 +33,8 @@ Search `index.html` for these (they're also listed in a comment at the top of th
 - `[your-domain.com]`: production domain (canonical URL, Open Graph, JSON-LD, contact email)
 - `[Company Name]`: legal entity in the footer
 - `hello@[your-domain.com]`: contact email
-- `#app-store-url`, `#google-play-url`: store listings. Swap the buttons for the official App Store and Google Play badges.
+- `#web-app-url`: the web app's address, used by every "Open MySafeEats" button (header, hero, and the get-started section)
 - `#privacy-policy-url`, `#terms-url`: legal pages
-- `"operatingSystem"` in the JSON-LD block: confirm platforms
 
 `og:image` needs an absolute URL, so it only works once the domain is set.
 
@@ -44,7 +43,25 @@ Search `index.html` for these (they're also listed in a comment at the top of th
 - **Logo:** "Scan Check" mark (a check made of barcode bars on a lime circle) with an Archivo Black wordmark at 72% width.
 - **Colors:** Orange `#E65E2C` (primary), Green `#245A49` (secondary), Lime `#E2EE6E` (accent), Cream `#F3E8D2` (background), Ink `#12261E` (text).
 - **Type:** Archivo (Google Fonts, SIL Open Font License).
-- **Results wording:** always scoped to the person's list: "Safe for your list", "Not safe for your list", "Can't check this one".
+- **Results wording:** always scoped to the person's list: "Safe for your list", "Not safe for your list", "Verify before you eat", "Can't check this one".
+
+## Built-in gluten list
+
+The site's demo and copy use this list of ingredients people with celiac disease need to watch out for:
+
+| Ingredient | Result when found |
+|---|---|
+| Wheat | Not safe |
+| Rye | Not safe |
+| Triticale | Not safe |
+| Barley | Not safe |
+| Malt | Not safe |
+| Regular oats (not labeled gluten-free) | Not safe |
+| Dextrin / Food starch | Verify (can be made from wheat; check the source, especially in meats) |
+| Brewer's yeast | Not safe |
+| Yeast extract | Not safe |
+
+Matching is whole-word, so "malt" doesn't match "maltodextrin" and "wheat" doesn't match "buckwheat"; oats labeled gluten-free aren't flagged.
 
 ## Accessibility
 
