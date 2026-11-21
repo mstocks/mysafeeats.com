@@ -12,6 +12,8 @@ Marketing website and brand kit for **MySafeEats**, an HTML5 web app that helps 
 | `favicon.svg`, `apple-touch-icon.png` | Browser and iOS home-screen icons. |
 | `og-image.png` | 1200×630 social share image. |
 
+Every "Open MySafeEats" button on the site (header, hero, and the get-started section) links to the web app at **https://app.mysafeeats.com**.
+
 ## Run it locally
 
 Open `index.html` in a browser, or serve the folder:
@@ -33,7 +35,6 @@ Search `index.html` for these (they're also listed in a comment at the top of th
 - `[your-domain.com]`: production domain (canonical URL, Open Graph, JSON-LD, contact email)
 - `[Company Name]`: legal entity in the footer
 - `hello@[your-domain.com]`: contact email
-- `#web-app-url`: the web app's address, used by every "Open MySafeEats" button (header, hero, and the get-started section)
 - `#privacy-policy-url`, `#terms-url`: legal pages
 
 `og:image` needs an absolute URL, so it only works once the domain is set.
